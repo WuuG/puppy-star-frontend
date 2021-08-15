@@ -6,8 +6,8 @@ Vue.use(VueRouter);
 const routes = [
   {
     path: "/",
-    name: "WebHeader",
-    component: () => import("../components/header/Header.vue"),
+    name: "Layout",
+    component: () => import("../views/layout/index.vue"),
   },
 ];
 

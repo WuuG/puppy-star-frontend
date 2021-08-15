@@ -5,7 +5,9 @@ import store from "./store";
 
 import "normalize.css";
 import ElementUI from "element-ui";
-import "element-ui/lib/theme-chalk/index.css";
+import "./assets/css/element-variable.scss";
+
+import "@/assets/css/common.scss";
 
 Vue.config.productionTip = false;
 Vue.use(ElementUI);
