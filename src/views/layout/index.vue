@@ -36,7 +36,6 @@ export default {
 <style lang="scss" scoped>
 .long {
   height: 1200px;
-  widows: 400px;
 }
 .content {
   flex-wrap: nowrap;

@@ -8,6 +8,7 @@ import ElementUI from "element-ui";
 import "./assets/css/element-variable.scss";
 
 import "@/assets/css/common.scss";
+import "@/assets/css/variable.scss";
 
 Vue.config.productionTip = false;
 Vue.use(ElementUI);
