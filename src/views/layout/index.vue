@@ -1,8 +1,11 @@
 <template>
   <el-container>
+    <!-- 头部 -->
     <el-header>
       <layout-header></layout-header>
     </el-header>
+
+    <!-- 侧边栏 -->
     <el-container class="app-container">
       <el-aside style="background-color: red">侧边</el-aside>
       <el-main class="content">
@@ -18,18 +21,22 @@
         </el-row>
       </el-main>
     </el-container>
+    <!-- 回到顶部 -->
+    <back-to-top></back-to-top>
   </el-container>
 </template>
-
 <script>
 import LayoutHeader from "./chil-comps/LayoutHeader.vue";
 import "element-ui/lib/theme-chalk/display.css";
+import BackToTop from "../../components/footer/backToTop.vue";
 
 export default {
   name: "Layout",
   components: {
     LayoutHeader,
+    BackToTop,
   },
+  methods: {},
 };
 </script>
 
