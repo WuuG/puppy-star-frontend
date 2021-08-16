@@ -7,6 +7,7 @@
     </el-header>
     <router-view></router-view>
     <!-- 底部 -->
+    <back-to-top></back-to-top>
   </el-container>
 </template>
 <script>
