@@ -3,12 +3,16 @@ import VueRouter from "vue-router";
 
 Vue.use(VueRouter);
 
-const routes = [
-  {
+const routes = [{
     path: "/",
     name: "Layout",
     component: () => import("../views/layout/index.vue"),
+    children: [{
+      path: 'login/',
+      component: () => import("../views/layout/model-window/LoginWindow.vue"),
+    }, ]
   },
+
 ];
 
 const router = new VueRouter({
