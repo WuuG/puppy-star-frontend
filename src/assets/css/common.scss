@@ -20,3 +20,16 @@ body {
   max-width: 1120px;
   margin: 0 auto;
 }
+
+.app-aside {
+  position: sticky;
+  top: 60px;
+  // 懒得处理侧边栏宽度的问题了
+  overflow: hidden;
+  height: calc(100vh - #{$height-header});
+  border-radius: 4px;
+  margin-top: 20px;
+  background-color: #fff;
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+  align-self: baseline;
+}

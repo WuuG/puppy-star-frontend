@@ -26,6 +26,8 @@ export default {
 
 <style lang="scss" scoped>
 .app-main {
+  overflow: hidden;
+  border-radius: 4px;
   flex-wrap: nowrap;
   width: 100%;
 }

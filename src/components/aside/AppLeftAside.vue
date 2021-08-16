@@ -1,5 +1,5 @@
 <template>
-  <el-aside style="background-color: green" class="app-aside" width="180px">
+  <el-aside class="app-aside" width="180px">
     <slot></slot>
   </el-aside>
 </template>
