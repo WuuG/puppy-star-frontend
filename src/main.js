@@ -9,6 +9,7 @@ import "./assets/css/element-variable.scss";
 
 import "@/assets/css/common.scss";
 import "@/assets/css/variable.scss";
+import "element-ui/lib/theme-chalk/display.css";
 
 Vue.config.productionTip = false;
 Vue.use(ElementUI);
