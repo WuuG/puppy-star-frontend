@@ -13,6 +13,7 @@ Vue.use(ElementUI);
 // 公共样式
 import "@/assets/css/common.scss";
 import "@/assets/css/variable.scss";
+import "element-ui/lib/theme-chalk/display.css";
 
 
 

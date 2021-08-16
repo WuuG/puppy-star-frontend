@@ -61,7 +61,4 @@ export default {
     height: 100px;
   }
 }
-#UP {
-  scale: 1.1;
-}
 </style>
