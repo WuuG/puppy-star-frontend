@@ -151,9 +151,10 @@ export default {
 
   // 模态框
   #model {
-    width: 50vw;
+    width: 100vw;
     height: 25vw;
     min-width: 375px;
+    max-width: 600px;
     min-height: 300px;
     position: relative;
     display: flex;
