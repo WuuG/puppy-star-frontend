@@ -1,69 +1,79 @@
 <template>
   <!-- 最外层 遮罩层 -->
-  <div id="mask">
+  <div
+    id="mask"
+    @click.self="closeTheWindow"
+    @mousewheel.native.prevent
+    @touchmove.native.prevent
+  >
     <!-- 模态窗口 -->
     <div id="model">
-      <!-- 表单 begin -->
-      <el-form
-        ref="form"
-        :model="form"
-        :rules="ruleForm"
-        status-icon
-        label-width="80px"
-        class="loginForm"
-      >
-        <!-- 标题栏 和 关闭按钮 -->
-        <div id="title">
-          <h3>登录</h3>
-          <button id="close" @click.once="closeTheWindow">
-            <i class="el-icon-close"></i>
-          </button>
-        </div>
-        <!-- 用户名 -->
-        <el-form-item label="用户名" prop="name">
-          <el-input
-            type="text"
-            v-model="form.userName"
-            auto-complete="off"
-            placeholder="请输入用户名"
-          ></el-input>
-        </el-form-item>
-        <!-- 密码 -->
-        <el-form-item label="密码" prop="password">
-          <el-input
-            type="password"
-            v-model="form.userPassword"
-            auto-complete="off"
-            placeholder="请输入密码"
-          ></el-input>
-        </el-form-item>
-        <el-form-item>
-          <!-- 表单 end -->
-
-          <!-- 两个按钮 分别为 登录 和 >前往注册 -->
-          <el-button
-            class="homeBut"
-            type="primary"
-            plain
-            @click="submit"
-            :loading="logining"
-            >登录</el-button
-          >
-          <el-button
-            class="register"
-            type="primary"
-            plain
-            @click="goToRegister"
-          >
-            >前往注册</el-button
-          >
-        </el-form-item>
-      </el-form>
+      <!-- 左半部分遮罩 -->
+      <div id="leftForm">
+        <div id="leftMask" ref="leftMask">打造一流喵汪宠物生态。</div>
+      </div>
+      <!-- 右半部分表单 -->
+      <div id="rightForm">
+        <!-- 表单 begin -->
+        <el-form
+          ref="form"
+          :model="form"
+          :rules="ruleForm"
+          status-icon
+          label-width="80px"
+          class="loginForm"
+        >
+          <!-- 标题栏 和 关闭按钮 -->
+          <div id="title">
+            <h3>登录</h3>
+            <i class="el-icon-close" @click="closeTheWindow"></i>
+          </div>
+          <!-- 用户名 -->
+          <el-form-item label="用户名" prop="name">
+            <el-input
+              type="text"
+              v-model="form.userName"
+              auto-complete="off"
+              placeholder="请输入用户名"
+            ></el-input>
+          </el-form-item>
+          <!-- 密码 -->
+          <el-form-item label="密码" prop="password">
+            <el-input
+              type="password"
+              v-model="form.userPassword"
+              auto-complete="off"
+              placeholder="请输入密码"
+            ></el-input>
+          </el-form-item>
+          <el-form-item>
+            <!-- 两个按钮 分别为 登录 和 >前往注册 -->
+            <el-button
+              class="homeBut"
+              type="warning"
+              round
+              @click="submit"
+              :loading="logining"
+              >登录</el-button
+            >
+            <el-button
+              class="register"
+              type="warning"
+              round
+              @click="goToRegister"
+            >
+              >前往注册</el-button
+            >
+          </el-form-item>
+        </el-form>
+        <!-- 表单 end -->
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+import anime from "animejs";
 export default {
   data() {
     return {
@@ -103,19 +113,23 @@ export default {
       });
     },
     goToRegister() {
-      this.$refs.form.resetFields();
+      // 操纵左侧遮罩遮盖右侧
+      let leftMask = this.$refs.leftMask;
+      anime({
+        duration: 500,
+        targets: leftMask, //css一样的选择器
+        translateX: 375, //与css一样的过渡效果
+        direction: "alternate",
+        easing: "linear", //动画曲线
+      });
     },
 
     closeTheWindow() {
-      console.log(document);
-      // document.body.style.height = "100vh";
-      this.$router.push("/");
       document.body.style["overflow-y"] = "auto";
+      this.$router.replace("/home");
     },
   },
   mounted() {
-    console.log(document);
-    // document.body.style.height = "100vh";
     document.body.style["overflow-y"] = "hidden";
   },
 };
@@ -143,30 +157,63 @@ export default {
     min-height: 300px;
     position: relative;
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
     align-items: center;
     background-color: #fff;
     border-radius: 20px;
-    // 窗口标题
-    #title {
-      display: flex;
-      justify-content: space-between;
-      border-radius: 30%;
-
-      // 关闭按钮
-      #close {
-        width: 40px;
-        height: 40px;
-        outline: none;
-        border: none;
+    z-index: 1;
+    overflow: hidden;
+    #leftForm {
+      flex: 1;
+      min-width: 375px;
+      max-width: 50%;
+      height: 100%;
+      // background: linear-gradient(to right, #ffb347, #ffcc33);
+      background: $color-yellow url("../../assets/images/login/doge.jpg") center;
+      background-size: cover;
+      border-radius: 20px;
+      #leftMask {
+        z-index: 9;
+        height: 100%;
+        width: 100%;
+        color: white;
+        background: linear-gradient(to right, #ffb347, #ffcc33);
         border-radius: 20px;
-        box-shadow: 2px 2px 3px #d1d9e6, -2px -2px 3px #fff;
-        justify-self: flex-start;
-        &:active {
-          border-radius: 20px;
-          box-shadow: inset 2px 2px 3px #d1d9e6, inset -2px -2px 3px #fff;
+        display: flex;
+        justify-content: flex-end;
+        align-items: flex-end;
+        padding: 10px 10px;
+        box-shadow: 2px 2px 4px #d1d9e6, -10px -10px 15px rgba(0, 0, 0, 0.7);
+      }
+    }
+    #rightForm {
+      flex: 1;
+      min-width: 375px;
+      max-width: 50%;
+      height: 100%;
+      // background-color: pink;
+      border-radius: 20px;
+      z-index: -1;
+      // 窗口标题
+      #title {
+        padding: 10px;
+        display: flex;
+        justify-content: space-between;
+        border-radius: 30%;
+
+        // 关闭按钮
+        .el-icon-close {
+          &:hover {
+            color: $color-yellow;
+          }
         }
       }
+    }
+    // 两个按钮
+    .homeBut,
+    .register {
+      border-radius: 10px;
+      // background-color: #fff;
     }
   }
 }

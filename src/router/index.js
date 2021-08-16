@@ -5,19 +5,22 @@ Vue.use(VueRouter);
 
 const routes = [{
     path: "/",
+    redirect: "home",
     name: "Layout",
     component: () => import("../views/layout/index.vue"),
 
-    redirect: "home",
+
     children: [{
-      path: "/home",
-      name: "HomePage",
-      component: () => import("../views/home-page/home-page.vue"),
-    }, {
-      path: 'login/',
-      name: "loginModel",
-      component: () => import("../views/layout/model-window/LoginWindow.vue"),
-    }, ],
+        path: "home",
+        name: "HomePage",
+        component: () => import("../views/home-page/home-page.vue")
+      },
+      {
+        path: 'login',
+        name: "loginModel",
+        component: () => import("../views/layout/model-window/LoginWindow.vue"),
+      },
+    ],
   },
 
 ];
