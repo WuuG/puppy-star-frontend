@@ -5,7 +5,7 @@
         <slot name="left"></slot>
       </div>
       <div class="header-content">
-        <slot name="middle"></slot>
+        <slot name="middle"> </slot>
       </div>
       <div class="header-right">
         <slot name="right"></slot>
@@ -26,15 +26,19 @@ export default {
 .header-right {
   height: $height-header;
 }
+.header {
+  background-color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
+}
 .header-left {
-  width: calc(#{$width-aside} + calc(calc(100% - #{$width-content}) / 2));
-  min-width: calc(#{$width-aside} - 20px);
-  background-color: aqua;
+  display: flex;
+  justify-content: flex-end;
+  width: calc(calc(100% - #{$width-content}) / 2);
+  min-width: $width-aside;
 }
 .header-content {
   flex: 1;
   max-width: $width-content;
-  background-color: red;
 }
 .header-right {
   background-color: green;

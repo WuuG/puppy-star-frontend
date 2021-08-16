@@ -1,10 +1,11 @@
 <template>
   <el-container>
     <!-- 头部 -->
-    <el-header>
+    <el-header class="header">
       <layout-header></layout-header>
     </el-header>
     <router-view></router-view>
+    <back-to-top></back-to-top>
   </el-container>
 </template>
 <script>
@@ -22,4 +23,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.header {
+  padding: 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
 </style>
