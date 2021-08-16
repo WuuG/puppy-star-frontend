@@ -106,20 +106,17 @@ export default {
       this.$refs.form.resetFields();
     },
 
-    afterOpen() {
-      this.scrollTop = document.scrollingElement.scrollTop;
-      window.document.addEventListener("scroll.unable", function () {
-        document.scrollingElement.scrollTop = this.scrollTop;
-      });
-    },
-
     closeTheWindow() {
-      console.log("-1");
+      console.log(document);
+      // document.body.style.height = "100vh";
       this.$router.push("/");
+      document.body.style["overflow-y"] = "auto";
     },
   },
-  created() {
+  mounted() {
     console.log(document);
+    // document.body.style.height = "100vh";
+    document.body.style["overflow-y"] = "hidden";
   },
 };
 </script>

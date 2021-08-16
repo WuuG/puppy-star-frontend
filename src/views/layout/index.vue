@@ -28,8 +28,8 @@
 </template>
 <script>
 import LayoutHeader from "./chil-comps/LayoutHeader.vue";
+import BackToTop from "@/components/footer/BackToTop.vue";
 import "element-ui/lib/theme-chalk/display.css";
-import BackToTop from "../../components/footer/backToTop.vue";
 
 export default {
   name: "Layout",
