@@ -24,16 +24,16 @@ export default {
 .header,
 .header-content,
 .header-right {
-  height: $--height-header;
+  height: $height-header;
 }
 .header-left {
-  width: calc(#{$--width-aside} + calc(calc(100% - #{$--width-content}) / 2));
-  min-width: calc(#{$--width-aside} - 20px);
+  width: calc(#{$width-aside} + calc(calc(100% - #{$width-content}) / 2));
+  min-width: calc(#{$width-aside} - 20px);
   background-color: aqua;
 }
 .header-content {
   flex: 1;
-  max-width: $--width-content;
+  max-width: $width-content;
   background-color: red;
 }
 .header-right {
