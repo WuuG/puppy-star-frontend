@@ -35,6 +35,7 @@ export default {
 // 一些从logo上取下来的颜色
 @import "@/assets/css/variable.scss";
 // 按钮固定为40*40px
+
 .UP {
   height: 100%;
   width: 100%;
