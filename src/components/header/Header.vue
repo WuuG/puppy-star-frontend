@@ -21,6 +21,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "@/assets/css/variable.scss";
 .header,
 .header-content,
 .header-right {
