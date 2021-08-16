@@ -43,7 +43,7 @@ export default {
   font-size: 40px;
   text-align: center;
   line-height: 40px;
-  color: $lightRed;
+  color: $color-lightRed;
   border-radius: 50%;
   transition: all 0.5s ease;
   &:hover .el-icon-star-on {
