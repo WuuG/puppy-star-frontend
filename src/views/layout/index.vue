@@ -1,5 +1,6 @@
 <template>
   <el-container>
+    <router-view></router-view>
     <!-- 头部 -->
     <el-header class="header">
       <layout-header></layout-header>
