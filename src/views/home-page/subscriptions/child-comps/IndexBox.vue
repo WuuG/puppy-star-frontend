@@ -11,7 +11,7 @@
     <div class="index-box-options">
       <ul class="left">
         <li class="options">
-          <emoji-picker :show="emojiShow" @select="selectedEmoji">
+          <emoji-picker @select="selectedEmoji">
             <template #reference>
               <el-button circle
                 ><i class="el-icon-ice-cream-round"></i
@@ -19,15 +19,7 @@
             </template>
           </emoji-picker>
         </li>
-        <li>
-          <emoji-picker :show="emojiShow" @select="selectedEmoji">
-            <template #reference>
-              <el-button circle
-                ><i class="el-icon-ice-cream-round"></i
-              ></el-button>
-            </template>
-          </emoji-picker>
-        </li>
+        <li></li>
       </ul>
       <div class="right">
         <el-button type="primary" round :disabled="sendBtnDisabled"
@@ -51,7 +43,6 @@ export default {
       size: {
         minRows: 2,
       },
-      emojiShow: true,
     };
   },
   computed: {
@@ -64,10 +55,11 @@ export default {
   },
   methods: {
     selectedEmoji(emoji) {
-      this.text = splice(this.text, this.selectionStart, emoji.native);
+      console.log(this.text, this.textSelectionStart);
+      this.text = splice(this.text, this.textSelectionStart, emoji.native);
     },
     onBlur(event) {
-      this.selectionStart = event.srcElement.selectionStart;
+      this.textSelectionStart = event.srcElement.selectionStart;
     },
   },
 };
