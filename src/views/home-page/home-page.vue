@@ -4,7 +4,7 @@
       <home-page-left-aside></home-page-left-aside>
     </template>
     <template #middle>
-      <home-page-content></home-page-content>
+      <router-view></router-view>
     </template>
     <template #right>
       <home-page-right-aside></home-page-right-aside>
@@ -14,13 +14,11 @@
 
 <script>
 import ContentLayout from "@/components/content-layout/ContentLayout.vue";
-import HomePageContent from "./child-comps/HomePageContent.vue";
 import HomePageRightAside from "./child-comps/HomePageRightAside.vue";
 import HomePageLeftAside from "./child-comps/HomePageLeftAside.vue";
 export default {
   name: "HomePage",
   components: {
-    HomePageContent,
     HomePageRightAside,
     HomePageLeftAside,
     ContentLayout,
