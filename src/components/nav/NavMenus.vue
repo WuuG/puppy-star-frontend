@@ -45,7 +45,7 @@
 
 <script>
 export default {
-  name: "navMenu",
+  name: "NavMenu",
   props: {
     data: {
       type: Array,
