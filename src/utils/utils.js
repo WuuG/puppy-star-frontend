@@ -12,3 +12,10 @@ export function debounce(func, delay = 20) {
     }, delay);
   };
 }
+
+/**
+ * 字符串插入
+ */
+export function splice(str, start, newStr) {
+  return str.slice(0, start) + newStr + str.slice(start);
+}
