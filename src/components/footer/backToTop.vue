@@ -41,7 +41,7 @@ export default {
 .UP {
   height: 100%;
   width: 100%;
-  background-color: rgb(252, 255, 220);
+  background-color: $color-yellow;
   font-size: 40px;
   text-align: center;
   line-height: 40px;

@@ -28,6 +28,6 @@ export default {
   padding: 0;
   position: sticky;
   top: 0;
-  z-index: 100;
+  z-index: 50;
 }
 </style>

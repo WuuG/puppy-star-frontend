@@ -1,12 +1,15 @@
 <template>
   <div>
+    <!-- 头部 -->
     <v-header>
+      <!-- 左侧 logo和应用名 -->
       <template #left>
         <a href="/" class="logo">
           <img src="~@/assets/images/logo.png" alt="" />
         </a>
         <div class="web-title">喵汪星</div>
       </template>
+      <!-- 中间 路由按钮-->
       <template #middle>
         <nav class="nav">
           <a
@@ -23,13 +26,34 @@
           </a>
         </nav>
       </template>
-    </v-header>
+      <!-- 右侧 用户区 -->
+      <template #right>
+        <div id="user" @click.stop="login">
+          <!-- 头像 -->
+          <div id="avatarBox">
+            <!-- 头像 -->
+            <img src="~@/assets/logo.png" />
+          </div>
+          <!-- 用户名 -->
+          <div id="name">
+            {{ userInfo.userName || "点击此处登录" }}
+          </div>
+        </div>
+      </template> </v-header
+    >w
+    <!-- 登录窗口  -->
+    <login-window
+      v-if="loginWindowShow"
+      @close="closeTheLoginWindow"
+    ></login-window>
   </div>
 </template>
 
 <script>
 import VHeader from "@/components/header/Header.vue";
+import loginWindow from "@/components/module-login/login.vue";
 
+import { mapState } from "vuex";
 export default {
   name: "LayoutHeader",
   data() {
@@ -62,12 +86,16 @@ export default {
         },
       ],
       activeIconPath: "1",
+
+      // 控制模态登录框的开关
+      loginWindowShow: false,
     };
   },
-  components: {
-    VHeader,
+  computed: {
+    ...mapState(["userInfo"]),
   },
   methods: {
+    //#region
     iconborderClass(path) {
       return {
         icon: true,
@@ -83,11 +111,30 @@ export default {
     deactiveIcon(event) {
       event.target.classList.remove("icon-mask");
     },
+    //#endregion
+    // 登录 打开模态框
+    login() {
+      if (this.userInfo.userName == "") {
+        this.loginWindowShow = true;
+      }
+    },
+    // 关闭模态框
+    closeTheLoginWindow() {
+      this.loginWindowShow = false;
+    },
+  },
+  directives: {},
+
+  components: {
+    VHeader,
+    loginWindow,
   },
 };
 </script>
 
 <style lang="scss" scoped>
+//#region
+@import "@/assets/css/variable.scss";
 .logo {
   display: block;
   height: 60px;
@@ -129,6 +176,53 @@ export default {
   .active-icon {
     color: $color-lightRed;
     border-bottom: 3px solid $color-lightRed;
+  }
+}
+//#endregion
+
+// 用户区 syt
+#user {
+  cursor: pointer;
+  // 头像框
+  #avatarBox {
+    float: right;
+    height: 40px;
+    width: 40px;
+    background-color: red;
+    border-radius: 50%;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.6);
+    margin-top: 10px;
+    border: 1px solid #fff;
+    overflow: hidden;
+    transition: all 0.5s;
+    // 头像
+    img {
+      height: 100%;
+      width: 100%;
+    }
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+  // 用户名
+  #name {
+    width: 125px;
+    float: right;
+    line-height: 60px;
+    font-size: 15px;
+    text-align: right;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    -o-text-overflow: ellipsis;
+    margin-right: 10px;
+    // background-color: pink;
+    overflow: hidden;
+  }
+  @media (max-width: 750px) {
+    #name {
+      display: none;
+    }
   }
 }
 </style>
