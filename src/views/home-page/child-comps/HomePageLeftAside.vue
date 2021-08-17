@@ -1,5 +1,5 @@
 <template>
-  <nav-menu :data="data"></nav-menu>
+  <nav-menu :data="data" @select="onSelect"></nav-menu>
 </template>
 
 <script>
@@ -16,13 +16,6 @@ export default {
               title: "最近动态",
               icon: "el-icon-s-order",
               index: "home",
-              children: [
-                {
-                  title: "最近动态",
-                  icon: "el-icon-s-order",
-                  index: "login",
-                },
-              ],
             },
             {
               title: "最近动态",
@@ -42,7 +35,7 @@ export default {
           ],
         },
         {
-          title: "首页",
+          title: "自定义",
           sidebarData: [
             {
               title: "最近动态",
@@ -78,6 +71,11 @@ export default {
   },
   components: {
     navMenu,
+  },
+  methods: {
+    onSelect(index) {
+      console.log(`根据index${index} 发送请求`);
+    },
   },
 };
 </script>

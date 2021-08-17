@@ -4,8 +4,8 @@
       default-active="home"
       v-for="({ title, sidebarData }, index) in data"
       :key="title.id"
-      router
       active-text-color="#ff6a5e"
+      @select="onSelect"
     >
       <template v-if="title">
         <p :class="index ? 'headlineOther' : 'headlineOne'">{{ title }}</p>
@@ -50,6 +50,11 @@ export default {
     data: {
       type: Array,
       required: true,
+    },
+  },
+  methods: {
+    onSelect(index) {
+      this.$emit("select", index);
     },
   },
 };

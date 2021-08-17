@@ -64,7 +64,7 @@ export default {
   .app-content {
     border-radius: 4px;
     height: 4000px;
-    background-color: #fff;
+    background-color: green;
     box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
   }
 }
