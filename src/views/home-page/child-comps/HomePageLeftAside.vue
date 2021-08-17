@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import navMenu from "@/components/nav/navMenu.vue";
+import navMenu from "@/components/nav/NavMenu.vue";
 export default {
   name: "HomePageLeftAside",
   data() {
