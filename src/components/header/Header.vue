@@ -7,6 +7,7 @@
       <div class="header-content hidden-xs-only">
         <slot name="middle"> </slot>
       </div>
+      <!-- 用户部分 -->
       <div class="header-right">
         <slot name="right"></slot>
       </div>
@@ -21,6 +22,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+//#region
 @import "@/assets/css/variable.scss";
 .header,
 .header-content,
@@ -41,8 +43,11 @@ export default {
   flex: 1;
   max-width: $width-content;
 }
+//#endregion
+
+// 用户部分
 .header-right {
   background-color: green;
-  width: 100px;
+  width: 175px;
 }
 </style>

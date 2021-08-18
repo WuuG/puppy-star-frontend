@@ -3,7 +3,7 @@
     <!-- 底部 右边 回到顶部 -->
     <el-backtop :bottom="100" @click="backToTop">
       <div class="UP">
-        <i class="el-icon-star-on"></i>
+        <i class="star el-icon-star-on"></i>
       </div>
     </el-backtop>
   </div>
@@ -12,19 +12,21 @@
 <script>
 // animejs动画库
 import anime from "animejs/lib/anime.es.js";
+
 export default {
   name: "BackToTop",
   methods: {
     backToTop() {
-      let randomNum = ~~(Math.random() * 50);
+      // console.log(e);
+      let randomNum = ~~(Math.random() * 180);
 
-      console.log("Let`s go to the top!!!~Rotate!", randomNum);
+      console.log("Let`s go to the top!!!~Rotate degree is", randomNum);
       anime({
-        targets: ".el-icon-star-on",
-        translateY: -60,
+        targets: ".star.el-icon-star-on",
+        translateY: -120,
         easing: "easeOutExpo",
-        rotateY: 130 + randomNum,
-        rotateZ: 80 + randomNum,
+        rotateY: 90 + randomNum,
+        rotateZ: 45 + randomNum,
         opacity: 0.5,
         scale: 1.5,
       });
@@ -34,14 +36,10 @@ export default {
 </script>
 
 <style lang="scss">
-// 一些从logo上取下来的颜色
-@import "@/assets/css/variable.scss";
-// 按钮固定为40*40px
-
 .UP {
   height: 100%;
   width: 100%;
-  background-color: rgb(252, 255, 220);
+  background-color: $color-yellow;
   font-size: 40px;
   text-align: center;
   line-height: 40px;

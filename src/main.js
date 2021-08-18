@@ -16,9 +16,14 @@ import "@/assets/css/variable.scss";
 import "element-ui/lib/theme-chalk/display.css";
 
 Vue.config.productionTip = false;
-Vue.use(ElementUI);
 
-Vue.config.productionTip = false;
+
+//引入全局组件viewer用于预览图片放大
+import Viewer from 'v-viewer'
+import 'viewerjs/dist/viewer.css'
+Vue.use(Viewer)
+
+
 new Vue({
   router,
   store,

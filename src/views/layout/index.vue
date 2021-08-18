@@ -11,7 +11,7 @@
 </template>
 <script>
 import LayoutHeader from "./chil-comps/LayoutHeader.vue";
-import BackToTop from "../../components/footer/backToTop.vue";
+import BackToTop from "@/components/footer/backToTop.vue";
 
 export default {
   name: "Layout",
@@ -28,6 +28,6 @@ export default {
   padding: 0;
   position: sticky;
   top: 0;
-  z-index: 100;
+  z-index: 50;
 }
 </style>
