@@ -18,9 +18,7 @@
         <li class="options">
           <emoji-picker @select="selectedEmoji" v-if="emojiPicker">
             <template #reference>
-              <el-button circle
-                ><i class="el-icon-ice-cream-round"></i
-              ></el-button>
+              <el-button circle>☺</el-button>
             </template>
           </emoji-picker>
         </li>
@@ -36,7 +34,7 @@
           round
           :disabled="sendBtnDisabled"
           @click="submit"
-          >发送
+          >{{ btnText }}
         </el-button>
       </div>
     </div>
@@ -75,6 +73,10 @@ export default {
           maxRows: 6,
         };
       },
+    },
+    btnText: {
+      type: String,
+      default: "发送",
     },
   },
   computed: {
