@@ -1,6 +1,6 @@
 <template>
   <el-container class="app-container">
-    <el-aside class="app-aside" width="180px">
+    <el-aside class="app-aside hidden-xs-only" width="180px">
       <slot name="left"></slot>
     </el-aside>
     <el-main class="app-main">

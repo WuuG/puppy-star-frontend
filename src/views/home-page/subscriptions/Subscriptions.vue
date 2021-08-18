@@ -1,11 +1,11 @@
 <template>
   <div>
-    <index-box></index-box>
+    <index-box :imageUpload="true" :emojiPicker="true"></index-box>
   </div>
 </template>
 
 <script>
-import IndexBox from "./child-comps/IndexBox.vue";
+import IndexBox from "@/components/content/IndexBox.vue";
 export default {
   name: "Subscriptions",
   components: {

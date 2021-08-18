@@ -4,7 +4,7 @@
       <div class="header-left">
         <slot name="left"></slot>
       </div>
-      <div class="header-content">
+      <div class="header-content hidden-xs-only">
         <slot name="middle"> </slot>
       </div>
       <div class="header-right">
