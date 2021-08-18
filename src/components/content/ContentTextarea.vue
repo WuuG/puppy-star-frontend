@@ -1,12 +1,10 @@
 <template>
-  <div>
-    <h1>主要内容</h1>
-  </div>
+  <div></div>
 </template>
 
 <script>
 export default {
-  name: "HomePageContent",
+  name: "Content",
 };
 </script>
 

@@ -3,20 +3,24 @@ import VueRouter from "vue-router";
 Vue.use(VueRouter);
 
 const routes = [{
-    path: "/",
-    redirect: "home",
-    name: "Layout",
-    component: () => import("../views/layout/index.vue"),
+  path: "/",
+  redirect: "home",
+  name: "Layout",
+  component: () => import("../views/layout/index.vue"),
 
-
+  children: [{
+    path: "home",
+    name: "HomePage",
+    component: () => import("../views/home-page/home-page.vue"),
+    redirect: "/home/subscriptions",
     children: [{
-      path: "home",
-      name: "HomePage",
-      component: () => import("../views/home-page/home-page.vue")
+      path: "subscriptions",
+      name: "Subscriptions",
+      component: () =>
+        import("../views/home-page/subscriptions/Subscriptions.vue"),
     }, ],
-  },
-
-];
+  }],
+}, ];
 
 const router = new VueRouter({
   mode: "history",
