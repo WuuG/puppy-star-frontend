@@ -3,7 +3,7 @@
     <!-- 底部 右边 回到顶部 -->
     <el-backtop :bottom="100" @click="backToTop">
       <div class="UP">
-        <i class="el-icon-star-on"></i>
+        <i class="star el-icon-star-on"></i>
       </div>
     </el-backtop>
   </div>
@@ -20,7 +20,7 @@ export default {
 
       console.log("Let`s go to the top!!!~Rotate!", randomNum);
       anime({
-        targets: ".el-icon-star-on",
+        targets: ".star.el-icon-star-on",
         translateY: -60,
         easing: "easeOutExpo",
         rotateY: 130 + randomNum,

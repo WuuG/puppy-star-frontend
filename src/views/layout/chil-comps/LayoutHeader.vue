@@ -29,7 +29,7 @@
       <!-- 右侧 用户区 -->
       <template #right>
         <div id="user" @click.stop="login">
-          <!-- 头像 -->
+          <!-- 头像及用户名 -->
           <div id="avatarBox">
             <!-- 头像 -->
             <img src="~@/assets/logo.png" />
@@ -39,8 +39,8 @@
             {{ userInfo.userName || "点击此处登录" }}
           </div>
         </div>
-      </template> </v-header
-    >w
+      </template>
+    </v-header>
     <!-- 登录窗口  -->
     <login-window
       v-if="loginWindowShow"
@@ -51,7 +51,7 @@
 
 <script>
 import VHeader from "@/components/header/Header.vue";
-import loginWindow from "@/components/module-login/login.vue";
+import LoginWindow from "@/components/module-login/login.vue";
 
 import { mapState } from "vuex";
 export default {
@@ -127,7 +127,7 @@ export default {
 
   components: {
     VHeader,
-    loginWindow,
+    LoginWindow,
   },
 };
 </script>
