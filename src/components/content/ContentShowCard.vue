@@ -1,34 +1,58 @@
 <template>
-  <div class="card">
-    <div class="header">
-      <!-- 头像 -->
-      <div class="avatarBox">
-        <img :src="user.avatar" />
+  <div class="cardALL">
+    <!-- #region 用户主体begin -->
+    <div class="card">
+      <div class="header">
+        <!-- 头像 -->
+        <div class="avatarBox">
+          <img :src="user.avatar" />
+        </div>
+        <!-- 用户名 -->
+        <div class="user">
+          <div class="name">{{ user.name }}</div>
+          <div class="other">{{ user.other }}</div>
+        </div>
       </div>
-      <!-- 用户名 -->
-      <div class="user">
-        <div class="name">{{ user.name }}</div>
-        <div class="other">发布于1点 北京</div>
+      <div class="content">
+        <div class="text">{{ content }}</div>
+        <div class="image">
+          <viewer :images="images">
+            <img v-for="(src, index) in images" :key="index" :src="src" />
+          </viewer>
+        </div>
+      </div>
+      <div class="footer">
+        <!-- 用于添加按钮，目前只有两个 -->
+        <span class="button">
+          <i class="icon el-icon-star-on"></i>
+          <span>点赞</span>
+        </span>
+        <span class="button" @click="commentsShow = !commentsShow">
+          <i class="icon el-icon-s-comment"></i>
+          <span>评论</span>
+        </span>
       </div>
     </div>
-    <div class="content">
-      <div class="text">{{ content }}</div>
-      <div class="image">
-        <viewer :images="images">
-          <img v-for="(src, index) in images" :key="index" :src="src" />
-        </viewer>
+    <!-- #endregion 用户主体end -->
+
+    <div class="comments" v-show="commentsShow">
+      <!-- #region 小用户卡片-->
+      <div class="little card">
+        <div class="header">
+          <!-- 头像 -->
+          <div class="avatarBox">
+            <img :src="user.avatar" />
+          </div>
+          <!-- 用户名 -->
+          <div class="user">
+            <div class="name">
+              我是评论者:<span class="content">这是我评论的内容。</span>
+            </div>
+            <div class="other">2分钟前</div>
+          </div>
+        </div>
       </div>
-    </div>
-    <div class="footer">
-      <!-- 用于添加按钮，目前只有两个 -->
-      <span class="button">
-        <i class="icon el-icon-star-on"></i>
-        <span>点赞</span>
-      </span>
-      <span class="button">
-        <i class="icon el-icon-s-comment"></i>
-        <span>评论</span>
-      </span>
+      <!-- #endregion -->
     </div>
   </div>
 </template>
@@ -37,7 +61,9 @@
 export default {
   name: "ContentShowCard",
   data() {
-    return {};
+    return {
+      commentsShow: false,
+    };
   },
   props: ["user", "content", "images"],
   mounted() {},
@@ -46,6 +72,7 @@ export default {
 </script>
 
 <style lang="scss">
+//#region 主体卡片
 span {
   user-select: none;
   -moz-user-select: none;
@@ -58,7 +85,7 @@ span {
   min-height: 150px;
   background-color: #fff;
   border-radius: 20px;
-  margin-bottom: 10px;
+  margin-top: 10px;
   padding-left: 10px;
   //头部 头像+用户名
   .header {
@@ -105,7 +132,7 @@ span {
     }
   }
   //中间内容 发布内容
-  .content {
+  > .content {
     font-size: 14px;
     margin-left: 40px;
     padding: 10px;
@@ -131,23 +158,15 @@ span {
           opacity: 0.7;
         }
       }
-      //   @media (min-width: 0) and(max-width: 1199px) {
-      //     img {
-      //     }
-      //   }
-      //   @media (min-width: 1200px) {
-      //     img {
-
-      //     }
-      //   }
     }
   }
   //底部的点赞和评论
   .footer {
+    width: 100%;
     display: flex;
     justify-content: space-around;
     align-items: center;
-    width: 100%;
+    padding-bottom: 10px;
     .button {
       font-size: 14px;
       cursor: pointer;
@@ -161,6 +180,43 @@ span {
         line-height: 100%;
         font-size: 20px;
       }
+    }
+  }
+}
+//#endregion
+.comments {
+  margin: 0 auto;
+  width: 95%;
+  z-index: 0;
+  animation: show 0.5s;
+  transform: perspective(500px);
+  @keyframes show {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  .little.card {
+    height: 50px;
+    background-color: rgb(247, 247, 247);
+    border-radius: 0 0 20px 20px;
+    padding: 20px 10px 20px 10px;
+    margin-top: 0px;
+    box-shadow: 0 1px 2px black;
+
+    font-weight: normal;
+    .name {
+      font-size: 14px;
+      color: #ed8060;
+      .content {
+        font-weight: 400;
+        color: black;
+      }
+    }
+    > .other {
+      font-size: 10px;
     }
   }
 }

@@ -16,15 +16,16 @@ export default {
   name: "BackToTop",
   methods: {
     backToTop() {
-      let randomNum = ~~(Math.random() * 50);
+      // console.log(e);
+      let randomNum = ~~(Math.random() * 180);
 
-      console.log("Let`s go to the top!!!~Rotate!", randomNum);
+      console.log("Let`s go to the top!!!~Rotate degree is", randomNum);
       anime({
         targets: ".star.el-icon-star-on",
-        translateY: -60,
+        translateY: -120,
         easing: "easeOutExpo",
-        rotateY: 130 + randomNum,
-        rotateZ: 80 + randomNum,
+        rotateY: 90 + randomNum,
+        rotateZ: 45 + randomNum,
         opacity: 0.5,
         scale: 1.5,
       });

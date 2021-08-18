@@ -7,10 +7,11 @@ export default new Vuex.Store({
   state: {
     // 用户信息
     userInfo: {
-      //用户名 和 密码 和手机号
+      //用户名 密码 手机号 头像src
       userName: '',
       userPassword: '',
       userPhone: '',
+      userAvatar: ''
     }
 
   },
