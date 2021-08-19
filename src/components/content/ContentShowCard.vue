@@ -15,8 +15,8 @@
       </div>
       <div class="content">
         <div class="text">{{ content }}</div>
-        <div class="image">
-          <viewer :images="images">
+        <div>
+          <viewer :images="images" class="image">
             <img v-for="(src, index) in images" :key="index" :src="src" />
           </viewer>
         </div>
@@ -84,7 +84,7 @@ span {
   width: 100%;
   min-height: 150px;
   background-color: #fff;
-  border-radius: 20px;
+  border-radius: 4px;
   margin-top: 10px;
   padding-left: 10px;
   //头部 头像+用户名
