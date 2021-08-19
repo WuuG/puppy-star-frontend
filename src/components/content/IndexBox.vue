@@ -1,41 +1,46 @@
 <template>
-  <div class="index-box">
-    <el-input
-      type="textarea"
-      v-model="text"
-      resize="none"
-      :placeholder="placeholder"
-      :autosize="textareaSize"
-      @blur="onBlur"
-    ></el-input>
-    <upload-images
-      :files.sync="imagesFile"
-      ref="upload"
-      v-if="imageUpload"
-    ></upload-images>
-    <div class="index-box-options">
-      <ul class="left">
-        <li class="options">
-          <emoji-picker @select="selectedEmoji" v-if="emojiPicker">
-            <template #reference>
-              <el-button circle>☺</el-button>
-            </template>
-          </emoji-picker>
-        </li>
-        <li class="options" v-if="imageUpload">
-          <el-button circle @click="onShowUpload"
-            ><i class="el-icon-picture-outline"></i
-          ></el-button>
-        </li>
-      </ul>
-      <div class="right">
-        <el-button
-          type="primary"
-          round
-          :disabled="sendBtnDisabled"
-          @click="submit"
-          >{{ btnText }}
-        </el-button>
+  <div class="index-box flex">
+    <div class="w-12" v-if="avatarSrc">
+      <el-avatar :src="avatarSrc"></el-avatar>
+    </div>
+    <div class="flex-1">
+      <el-input
+        type="textarea"
+        v-model="text"
+        resize="none"
+        :placeholder="placeholder"
+        :autosize="textareaSize"
+        @blur="onBlur"
+      ></el-input>
+      <upload-images
+        :files.sync="imagesFile"
+        ref="upload"
+        v-if="imageUpload"
+      ></upload-images>
+      <div class="index-box-options">
+        <ul class="left">
+          <li class="options">
+            <emoji-picker @select="selectedEmoji" v-if="emojiPicker">
+              <template #reference>
+                <el-button circle>☺</el-button>
+              </template>
+            </emoji-picker>
+          </li>
+          <li class="options" v-if="imageUpload">
+            <el-button circle @click="onShowUpload"
+              ><i class="el-icon-picture-outline"></i
+            ></el-button>
+          </li>
+        </ul>
+        <div class="right">
+          <el-button
+            type="primary"
+            round
+            :disabled="sendBtnDisabled"
+            @click="submit"
+            >{{ btnText }}
+          </el-button>
+        </div>
       </div>
     </div>
   </div>
@@ -78,6 +83,10 @@ export default {
       type: String,
       default: "发送",
     },
+    avatarSrc: {
+      type: String,
+      default: "",
+    },
   },
   computed: {
     sendBtnDisabled: function () {
@@ -113,7 +122,6 @@ export default {
 
 <style lang="scss" scoped>
 .index-box {
-  padding: 20px;
   border-radius: 4px;
   background-color: #fff;
   .index-box-options {
