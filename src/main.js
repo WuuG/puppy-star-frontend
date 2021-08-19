@@ -14,15 +14,15 @@ Vue.use(ElementUI);
 import "@/assets/css/common.scss";
 import "@/assets/css/variable.scss";
 import "element-ui/lib/theme-chalk/display.css";
+// tailwindcss
+import "./assets/css/tailwindcss.css";
 
 Vue.config.productionTip = false;
 
-
 //引入全局组件viewer用于预览图片放大
-import Viewer from 'v-viewer'
-import 'viewerjs/dist/viewer.css'
-Vue.use(Viewer)
-
+import Viewer from "v-viewer";
+import "viewerjs/dist/viewer.css";
+Vue.use(Viewer);
 
 new Vue({
   router,
