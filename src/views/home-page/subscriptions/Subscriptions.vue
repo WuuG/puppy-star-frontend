@@ -1,11 +1,6 @@
 <template>
   <div>
-    <index-box :imageUpload="true" :emojiPicker="true"></index-box>
-    <index-box
-      :emojiPicker="true"
-      class="index-box-out"
-      :textareaSize="{ minRows: 1, maxRows: 2 }"
-    ></index-box>
+    <index-box :imageUpload="true" :emojiPicker="true" class="p-5"></index-box>
 
     <!-- merge时保留 -->
     <content-show-card
@@ -14,6 +9,12 @@
       :images="images"
     ></content-show-card>
     <!-- merge时保留 -->
+    <content-show-card
+      :user="user"
+      :content="content"
+      :images="images"
+    ></content-show-card>
+
     <content-show-card
       :user="user"
       :content="content"
