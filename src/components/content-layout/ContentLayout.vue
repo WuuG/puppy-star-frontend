@@ -48,13 +48,13 @@ export default {
   top: 60px;
   border-radius: 4px;
   margin-top: 20px;
-  background-color: #fff;
 }
 .app-aside {
   // 懒得处理侧边栏宽度的问题了
   overflow-x: hidden;
   height: calc(100vh - #{$height-header} - 20px);
   align-self: baseline;
+  background-color: #fff;
 }
 
 .app-main {
