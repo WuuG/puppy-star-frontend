@@ -36,12 +36,6 @@ export default {
 </script>
 
 <style lang="scss">
-span {
-  user-select: none;
-  -moz-user-select: none;
-  -webkit-user-select: none;
-  -ms-user-select: none;
-}
 .UP {
   height: 100%;
   width: 100%;
@@ -52,6 +46,7 @@ span {
   color: $color-lightRed;
   border-radius: 50%;
   transition: all 0.5s ease;
+
   &:hover .el-icon-star-on {
     transform: scale(1.1);
   }

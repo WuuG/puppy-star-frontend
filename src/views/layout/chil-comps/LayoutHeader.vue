@@ -51,7 +51,7 @@
 
 <script>
 import VHeader from "@/components/header/Header.vue";
-import LoginWindow from "@/components/module-login/login.vue";
+import LoginWindow from "@/components/module-login/Login.vue";
 
 import { mapState } from "vuex";
 export default {

@@ -1,6 +1,6 @@
 <template>
   <div class="cardALL">
-    <!-- #region 用户主体begin -->
+    <!-- #region 用户卡片主体begin -->
     <div class="card">
       <div class="header">
         <!-- 头像 -->
@@ -36,6 +36,13 @@
     <!-- #endregion 用户主体end -->
 
     <div class="comments" v-show="commentsShow">
+      <!-- #region 评论框 -->
+      <index-box
+        :emojiPicker="true"
+        class="index-box-out"
+        :textareaSize="{ minRows: 1, maxRows: 2 }"
+      ></index-box>
+      <!-- #endregion -->
       <!-- #region 小用户卡片-->
       <div class="little card">
         <div class="header">
@@ -58,6 +65,7 @@
 </template>
 
 <script>
+import IndexBox from "./IndexBox.vue";
 export default {
   name: "ContentShowCard",
   data() {
@@ -67,7 +75,9 @@ export default {
   },
   props: ["user", "content", "images"],
   mounted() {},
-  components: {},
+  components: {
+    IndexBox,
+  },
 };
 </script>
 
@@ -199,10 +209,10 @@ span {
     }
   }
   .little.card {
-    height: 50px;
+    min-height: auto;
     background-color: rgb(247, 247, 247);
     border-radius: 0 0 20px 20px;
-    padding: 20px 10px 20px 10px;
+    padding: 0px 10px 20px 10px;
     margin-top: 0px;
     box-shadow: 0 1px 2px black;
 

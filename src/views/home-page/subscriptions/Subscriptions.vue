@@ -1,11 +1,6 @@
 <template>
   <div>
     <index-box :imageUpload="true" :emojiPicker="true"></index-box>
-    <index-box
-      :emojiPicker="true"
-      class="index-box-out"
-      :textareaSize="{ minRows: 1, maxRows: 2 }"
-    ></index-box>
 
     <!-- merge时保留 -->
     <content-show-card
@@ -24,7 +19,7 @@
 
 <script>
 import IndexBox from "@/components/content/IndexBox.vue";
-import ContentShowCard from "@/components/content/ContentShowCard";
+import ContentShowCard from "@/components/content/ContentShowCard.vue";
 const testPic =
   "https://img1.baidu.com/it/u=2579940132,1296036844&fm=11&fmt=auto&gp=0.jpg";
 
