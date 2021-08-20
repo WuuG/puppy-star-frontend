@@ -41,6 +41,7 @@ export default {
   width: 100%;
   max-width: 1120px;
   margin: 0 auto;
+  align-items: flex-start;
 }
 .app-aside,
 .app-right-aside {
@@ -65,6 +66,7 @@ export default {
   }
 }
 .app-right-aside {
+  flex-grow: 0;
   width: 280px;
 }
 </style>

@@ -42,7 +42,7 @@ export default {
           articleId: "1213123",
           title: "高原上的南无sssssssssssssssssssssssss",
           status: "新",
-          trend: "11万",
+          trend: "1111.1万",
         },
         {
           articleId: "1213123",

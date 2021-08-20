@@ -171,7 +171,7 @@ export default {
     contentStyleObejct() {
       if (this.trend) {
         return {
-          "max-width": "150px",
+          "max-width": "100px",
         };
       }
       return {};
