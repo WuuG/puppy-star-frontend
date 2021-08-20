@@ -1,6 +1,6 @@
 <template>
   <div class="header shadow-sm">
-    <el-row type="flex">
+    <el-row type="flex" class="justify-between">
       <div class="header-left">
         <slot name="left"></slot>
       </div>

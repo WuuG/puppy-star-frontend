@@ -33,6 +33,8 @@
 
 <script>
 import ArticleRecommand from "@/components/content/CardList.vue";
+import EVENT from "@/store/mutation-types";
+
 export default {
   name: "HomePageRigthAside",
   data() {
@@ -112,7 +114,7 @@ export default {
   },
   methods: {
     reload() {
-      console.log(1);
+      this.$store.dispatch(EVENT.DISPATH_ARTICLE_GET);
     },
     onArticle(article) {
       console.log(article);

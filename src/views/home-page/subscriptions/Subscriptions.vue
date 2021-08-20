@@ -27,7 +27,7 @@
 import IndexBox from "@/components/content/IndexBox.vue";
 import ContentShowCard from "@/components/content/ContentShowCard";
 const testPic =
-  "https://img1.baidu.com/it/u=2579940132,1296036844&fm=11&fmt=auto&gp=0.jpg";
+  "https://pic3.zhimg.com/22b797a33ce00581e37f9376cf37609b_is.jpg";
 
 export default {
   name: "Subscriptions",
@@ -37,8 +37,7 @@ export default {
       user: {
         name: "小明哥哥",
         other: "发布于上海",
-        avatar:
-          "https://img1.baidu.com/it/u=2579940132,1296036844&fm=11&fmt=auto&gp=0.jpg", //路径
+        avatar: testPic, //路径
         id: "001",
       },
       content: "这是内容。",
