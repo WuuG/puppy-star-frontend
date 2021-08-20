@@ -2,8 +2,8 @@
   <div>
     <el-card>
       <!-- header -->
-      <div slot="header">
-        <slot name="headr">
+      <div slot="header" v-if="headerShow">
+        <slot name="headr-inline">
           <span class="font-medium text-lg">{{ title }}</span>
           <el-link
             :underline="false"
@@ -25,22 +25,25 @@
       >
         <div class="flex">
           <!-- 左侧图标 -->
-          <span :class="rankClass(index)" v-show="leftIndex">
+          <span :class="rankClass(index)" v-if="leftIndex">
             <template v-if="index">
               {{ index }}
             </template>
             <template v-else>
-              <i class="el-icon-upload2"></i>
+              <slot name="top">
+                <i class="el-icon-upload2"></i>
+              </slot>
             </template>
           </span>
           <!-- 中间的的title -->
           <span
-            class="title inline-block truncate leading-6 hover:text-red-400"
+            class="inline-block truncate leading-6 hover:text-red-400"
+            :style="contentStyleObejct"
           >
             <slot name="title" :item="article"> use #title="{item}" </slot>
           </span>
           <!-- 右侧趋势 -->
-          <span class="text-gray-400 ml-1 leading-6">
+          <span class="text-gray-400 ml-1 leading-6" v-if="trend">
             <slot name="trend" :item="article"> use #trend="{item}"</slot>
           </span>
         </div>
@@ -56,14 +59,14 @@
             rounded
           "
           :style="trendIconBgColor(article.status)"
-          v-show="rightIcon"
+          v-if="rightIcon"
         >
           <slot name="icon" :item="article">
             {{ article.status }}
           </slot>
         </span>
       </div>
-      <div class="text-center pt-2">
+      <div class="text-center pt-2" v-if="footer">
         <el-link :underline="false" @click.prevent="clickFooter">{{
           footer
         }}</el-link>
@@ -77,7 +80,19 @@ import { ranky } from "@/utils/utils";
 export default {
   props: {
     title: String,
-    footer: String,
+    footer: {
+      type: String,
+      default: "",
+    },
+    /**
+     * 右侧热点icon的图标背景色的映射map
+     * @default
+     * {
+     *   新: "#EF4444",
+     *   沸: "#FCD34D",
+     *   热: "#DC2626",
+     * };
+     */
     colorMap: {
       type: Object,
       default() {
@@ -88,14 +103,44 @@ export default {
         };
       },
     },
+    /**
+     * card header的显示
+     * @default false
+     */
+    headerShow: {
+      type: Boolean,
+      default: false,
+    },
+    /**
+     * 左侧index的显示
+     * @default true
+     */
     leftIndex: {
       type: Boolean,
-      default: true,
+      default: false,
     },
+    /**
+     * trend数据的显示
+     * @default false
+     */
+    trend: {
+      type: Boolean,
+      default: false,
+    },
+    /**
+     * 右侧热点图标的显示
+     * @default false
+     */
     rightIcon: {
       type: Boolean,
-      default: true,
+      default: false,
     },
+    /**
+     * 传入的数据对象,默认使用以下属性进行渲染
+     * @this title 文本内容
+     * @this trend 动态热度
+     * @this status 动态热度图标文字,这里需要注意colorMap.里会根据status的值进行background-color的设置.
+     */
     data: {
       type: Array,
       required: true,
@@ -122,6 +167,15 @@ export default {
         return "background-color: #EF4444";
       };
     },
+    // 用来判断中间的内容是否要出现省略符
+    contentStyleObejct() {
+      if (this.trend) {
+        return {
+          "max-width": "150px",
+        };
+      }
+      return {};
+    },
   },
   methods: {
     reload() {
@@ -138,7 +192,4 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.title {
-  max-width: 150px;
-}
 </style>

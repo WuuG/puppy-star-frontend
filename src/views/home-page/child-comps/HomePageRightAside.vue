@@ -3,8 +3,12 @@
     <article-recommand
       title="星球热搜"
       footer="查看完整的星球动态"
-      :data="articleData"
       class="rounded-sm bg-white"
+      :data="articleData"
+      :trend="true"
+      :leftIndex="true"
+      :rightIcon="true"
+      :headerShow="true"
       @reload="reload"
       @clickItem="onArticle"
       @clickFooter="onFooter"
@@ -19,11 +23,16 @@
         {{ item.status }}
       </template>
     </article-recommand>
+    <article-recommand :data="articleData">
+      <template #title="{ item }">
+        {{ item.title }}
+      </template>
+    </article-recommand>
   </div>
 </template>
 
 <script>
-import ArticleRecommand from "@/components/content/article-recommand/ArticleRecommand.vue";
+import ArticleRecommand from "@/components/content/CardList.vue";
 export default {
   name: "HomePageRigthAside",
   data() {

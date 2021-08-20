@@ -18,9 +18,9 @@
         <slot name="middle"></slot>
       </el-col>
     </el-main>
-    <el-aside class="app-right-aside hidden-md-and-down" v-if="showRightAside">
+    <div class="app-right-aside hidden-md-and-down" v-if="showRightAside">
       <slot name="right"> </slot>
-    </el-aside>
+    </div>
   </el-container>
 </template>
 
@@ -66,6 +66,5 @@ export default {
 }
 .app-right-aside {
   width: 280px;
-  height: 80vh;
 }
 </style>
