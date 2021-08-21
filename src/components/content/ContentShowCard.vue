@@ -1,20 +1,21 @@
 <template>
-  <div class="cardALL">
-    <!-- #region 用户卡片主体begin -->
-    <div class="card">
+  <section class="cardALL card">
+    <!-- #region 用户主体begin -->
+    <div class="pl-3">
       <div class="header">
         <!-- 头像 -->
         <div class="avatarBox">
           <img :src="user.avatar" />
         </div>
         <!-- 用户名 -->
-        <div class="user">
+        <div class="user pl-3">
           <div class="name">{{ user.name }}</div>
           <div class="other">{{ user.other }}</div>
         </div>
       </div>
       <div class="content">
         <div class="text">{{ content }}</div>
+
         <div class="image">
           <viewer :images="images" style="display: flex; flex-wrap: wrap">
             <img v-for="(src, index) in images" :key="index" :src="src" />
@@ -32,36 +33,35 @@
           <span>评论</span>
         </span>
       </div>
-    </div>
-    <!-- #endregion 用户主体end -->
-
-    <div class="comments" v-show="commentsShow">
-      <!-- #region 评论框 -->
-      <index-box
-        :emojiPicker="true"
-        class="index-box-out"
-        :textareaSize="{ minRows: 1, maxRows: 2 }"
-      ></index-box>
+      <!-- #endregion 用户主体end -->
       <!-- #endregion -->
-      <!-- #region 小用户卡片-->
-      <div class="little card">
-        <div class="header">
-          <!-- 头像 -->
-          <div class="avatarBox">
-            <img :src="user.avatar" />
-          </div>
-          <!-- 用户名 -->
-          <div class="user">
-            <div class="name">
-              我是评论者:<span class="content">这是我评论的内容。</span>
+    </div>
+    <div>
+      <div class="comments border-t" v-show="commentsShow">
+        <!-- #region 小用户卡片-->
+        <div class="little card">
+          <index-box
+            :textareaSize="{ minRows: 1, maxRows: 3 }"
+            :emojiPicker="true"
+            :avatarSrc="user.avatar"
+          ></index-box>
+          <div class="header">
+            <!-- 头像 -->
+            <div class="avatarBox">
+              <img :src="user.avatar" />
             </div>
-            <div class="other">2分钟前</div>
+            <!-- 用户名 -->
+            <div class="user">
+              <div class="name">
+                我是评论者:<span class="content">这是我评论的内容。</span>
+              </div>
+              <div class="other">2分钟前</div>
+            </div>
           </div>
         </div>
       </div>
-      <!-- #endregion -->
     </div>
-  </div>
+  </section>
 </template>
 
 <script>
@@ -94,9 +94,8 @@ span {
   width: 100%;
   min-height: 150px;
   background-color: #fff;
-  border-radius: 20px;
+  border-radius: 4px;
   margin-top: 10px;
-  padding-left: 10px;
   //头部 头像+用户名
   .header {
     width: 100%;
@@ -143,7 +142,7 @@ span {
     }
   }
   //中间内容 发布内容
-  > .content {
+  .content {
     font-size: 14px;
     margin-left: 40px;
     padding: 10px;
@@ -205,7 +204,6 @@ span {
 //#endregion
 .comments {
   margin: 0 auto;
-  width: 95%;
   z-index: 0;
   animation: show 0.5s;
   transform: perspective(500px);
@@ -223,7 +221,6 @@ span {
     border-radius: 0 0 20px 20px;
     padding: 0px 10px 20px 10px;
     margin-top: 0px;
-    box-shadow: 0 1px 2px black;
 
     font-weight: normal;
     .name {

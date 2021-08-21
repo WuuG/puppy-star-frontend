@@ -1,6 +1,6 @@
 <template>
-  <div class="header">
-    <el-row type="flex">
+  <div class="header shadow-sm">
+    <el-row type="flex" class="justify-between">
       <div class="header-left">
         <slot name="left"></slot>
       </div>
@@ -31,7 +31,6 @@ export default {
 }
 .header {
   background-color: #ffffff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
 }
 .header-left {
   display: flex;
@@ -47,7 +46,6 @@ export default {
 
 // 用户部分
 .header-right {
-  background-color: green;
   width: 175px;
 }
 </style>
