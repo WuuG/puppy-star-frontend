@@ -43,6 +43,7 @@ const actions = {
         message: "已经没有更多数据啦！",
       });
     }
+    console.log(data);
     commit("pushArticle", data);
   },
 };

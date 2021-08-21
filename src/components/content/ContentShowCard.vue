@@ -74,7 +74,7 @@ export default {
   },
   computed: {
     name() {
-      return this.author.login_name ? this.author.login_name : "用户未设置昵称";
+      return this.author.login_name ? this.author.login_name : "未查找到该用户";
     },
     location() {
       return this.author.location ? this.author.location : "隐藏";
@@ -162,9 +162,10 @@ span {
     padding-right: 50px;
     display: flex;
     flex-direction: column;
-    //文本内容
-    // .text {
-    // }
+    // 文本内容
+    .text {
+      white-space: pre-line;
+    }
     //图片内容
     .image {
       display: flex;
