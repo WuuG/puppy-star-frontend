@@ -9,6 +9,9 @@
 
 <script>
 import navMenu from "@/components/nav/NavMenus.vue";
+import EVENT from "@/store/mutation-types";
+import { mapMutations } from "vuex";
+
 export default {
   name: "HomePageLeftAside",
   data() {
@@ -80,7 +83,13 @@ export default {
   methods: {
     onSelect(item) {
       console.log(item);
+      this.reloadArticle(true);
+      console.log(this.$store.state.article.firstLoading);
+      console.log(item);
     },
+    ...mapMutations("article", {
+      reloadArticle: EVENT.CHANGE_LOADING,
+    }),
   },
 };
 </script>

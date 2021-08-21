@@ -74,7 +74,7 @@ export default {
   },
   computed: {
     name() {
-      return this.author.login_name ? this.author.login_name : "未查找到该用户";
+      return this.author.login_name ? this.author.login_name : "";
     },
     location() {
       return this.author.location ? this.author.location : "隐藏";
