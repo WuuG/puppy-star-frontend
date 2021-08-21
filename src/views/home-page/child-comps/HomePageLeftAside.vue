@@ -1,5 +1,10 @@
 <template>
-  <nav-menu :data="data" @select="onSelect"></nav-menu>
+  <nav-menu
+    :data="data"
+    @select="onSelect"
+    :page-title="pageTitle"
+    default-active="recently"
+  ></nav-menu>
 </template>
 
 <script>
@@ -8,29 +13,29 @@ export default {
   name: "HomePageLeftAside",
   data() {
     return {
+      pageTitle: "首页",
       data: [
         {
-          title: "首页",
           sidebarData: [
             {
               title: "最近动态",
               icon: "el-icon-s-order",
-              index: "home",
+              index: "recently",
             },
             {
-              title: "最近动态",
+              title: "最新动态",
               icon: "el-icon-s-order",
-              index: "home",
+              index: "new",
             },
             {
-              title: "最近动态",
+              title: "特别关注",
               icon: "el-icon-s-order",
-              index: "home",
+              index: "specialy",
             },
             {
-              title: "最近动态",
+              title: "好友圈",
               icon: "el-icon-s-order",
-              index: "home",
+              index: "friends",
             },
           ],
         },
@@ -40,29 +45,29 @@ export default {
             {
               title: "最近动态",
               icon: "el-icon-s-order",
-              index: "home",
+              index: "1",
               children: [
                 {
                   title: "最近动态",
                   icon: "el-icon-s-order",
-                  index: "home",
+                  index: "2",
                 },
               ],
             },
             {
               title: "最近动态",
               icon: "el-icon-s-order",
-              index: "home",
+              index: "3",
             },
             {
               title: "最近动态",
               icon: "el-icon-s-order",
-              index: "home",
+              index: "4",
             },
             {
               title: "最近动态",
               icon: "el-icon-s-order",
-              index: "home",
+              index: "5",
             },
           ],
         },
@@ -73,8 +78,8 @@ export default {
     navMenu,
   },
   methods: {
-    onSelect(index) {
-      console.log(`根据index${index} 发送请求`);
+    onSelect(item) {
+      console.log(item);
     },
   },
 };
