@@ -6,7 +6,8 @@ import axios from "axios";
 import { Message } from "element-ui";
 // import store from "@/store";
 
-const baseURL = "https://qcwwpx.app.cloudendpoint.cn/api";
+// const baseURL = "https://qcwwpx.app.cloudendpoint.cn/api";
+const baseURL = "/local";
 
 // create an axios instance
 const service = axios.create({
