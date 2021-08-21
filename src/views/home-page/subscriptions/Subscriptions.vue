@@ -1,5 +1,6 @@
 <template>
   <div>
+    <el-button type="primary" @click="click">测试按钮</el-button>
     <index-box :imageUpload="true" :emojiPicker="true" class="p-5"></index-box>
 
     <!-- merge时保留 -->
@@ -24,6 +25,8 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
 import IndexBox from "@/components/content/IndexBox.vue";
 import ContentShowCard from "@/components/content/ContentShowCard";
 const testPic =
@@ -45,9 +48,17 @@ export default {
       //#endregion
     };
   },
+  computed: {
+    ...mapGetters("article", ["articleArray"]),
+  },
   components: {
     IndexBox,
     ContentShowCard,
+  },
+  methods: {
+    click() {
+      console.log(this.articleArray);
+    },
   },
 };
 </script>

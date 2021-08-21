@@ -47,9 +47,16 @@ const actions = {
   },
 };
 
+const getters = {
+  articleArray: (state) => {
+    return state.articleArray;
+  },
+};
+
 export default {
   namespaced: true,
   state,
   mutations,
   actions,
+  getters,
 };
