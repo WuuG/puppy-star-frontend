@@ -42,9 +42,10 @@ const actions = {
         type: "warning",
         message: "已经没有更多数据啦！",
       });
+      return false;
     }
-    console.log(data);
     commit("pushArticle", data);
+    return true;
   },
 };
 
