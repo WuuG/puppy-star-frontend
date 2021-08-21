@@ -4,9 +4,7 @@
       <home-page-left-aside></home-page-left-aside>
     </template>
     <template #middle>
-      <keep-alive>
-        <router-view></router-view>
-      </keep-alive>
+      <router-view></router-view>
     </template>
     <template #right>
       <home-page-right-aside></home-page-right-aside>
