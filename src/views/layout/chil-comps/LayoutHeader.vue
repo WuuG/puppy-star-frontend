@@ -32,6 +32,7 @@
           <!-- 头像及用户名 -->
           <div id="avatarBox">
             <!-- 头像 -->
+            <!-- <el-avatar src="~@/assets/logo.png"></el-avatar> -->
             <img src="~@/assets/logo.png" />
           </div>
           <!-- 用户名 -->
@@ -188,7 +189,6 @@ export default {
     float: right;
     height: 40px;
     width: 40px;
-    background-color: red;
     border-radius: 50%;
     box-shadow: 0 0 4px rgba(0, 0, 0, 0.6);
     margin-top: 10px;
@@ -199,6 +199,7 @@ export default {
     img {
       height: 100%;
       width: 100%;
+      object-fit: cover;
     }
     &:hover {
       transform: scale(1.1);
@@ -216,7 +217,6 @@ export default {
     white-space: nowrap;
     -o-text-overflow: ellipsis;
     margin-right: 10px;
-    // background-color: pink;
     overflow: hidden;
   }
   @media (max-width: 750px) {
