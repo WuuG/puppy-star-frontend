@@ -5,19 +5,7 @@
 
     <!-- merge时保留 -->
     <content-show-card
-      :user="user"
-      :content="content"
-      :images="images"
-    ></content-show-card>
-    <!-- merge时保留 -->
-    <content-show-card
-      :user="user"
-      :content="content"
-      :images="images"
-    ></content-show-card>
-
-    <content-show-card
-      :user="user"
+      :authorId="id"
       :content="content"
       :images="images"
     ></content-show-card>
@@ -29,6 +17,7 @@ import { mapGetters } from "vuex";
 
 import IndexBox from "@/components/content/IndexBox.vue";
 import ContentShowCard from "@/components/content/ContentShowCard";
+
 const testPic =
   "https://pic3.zhimg.com/22b797a33ce00581e37f9376cf37609b_is.jpg";
 
@@ -37,12 +26,7 @@ export default {
   data() {
     return {
       //#region 一个卡片中的内容
-      user: {
-        name: "小明哥哥",
-        other: "发布于上海",
-        avatar: testPic, //路径
-        id: "001",
-      },
+      id: "611d2e4632cb4a2d0fc1b800",
       content: "这是内容。",
       images: [testPic, testPic, testPic, testPic, testPic], //src数组
       //#endregion

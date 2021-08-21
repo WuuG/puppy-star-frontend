@@ -5,12 +5,13 @@
       <div class="header">
         <!-- 头像 -->
         <div class="avatarBox">
-          <img :src="user.avatar" />
+          <img v-if="author && author.avatar" :src="author.avatar" />
+          <img v-else src="~@/assets/images/logo.png" alt="" />
         </div>
         <!-- 用户名 -->
         <div class="user pl-3">
-          <div class="name">{{ user.name }}</div>
-          <div class="other">{{ user.other }}</div>
+          <div class="name">{{ name }}</div>
+          <div class="other">{{ location }}</div>
         </div>
       </div>
       <div class="content">
@@ -27,55 +28,55 @@
           <i class="icon el-icon-star-on"></i>
           <span>点赞</span>
         </span>
-        <span class="button" @click="commentsShow = !commentsShow">
+        <span class="button" @click="commentShow = !commentShow">
           <i class="icon el-icon-s-comment"></i>
           <span>评论</span>
         </span>
       </div>
+      <comment-list
+        :comment-show="commentShow"
+        :comments="comments"
+      ></comment-list>
       <!-- #endregion 用户主体end -->
       <!-- #endregion -->
-    </div>
-    <div>
-      <div class="comments border-t" v-show="commentsShow">
-        <!-- #region 小用户卡片-->
-        <div class="little card">
-          <index-box
-            :textareaSize="{ minRows: 1, maxRows: 3 }"
-            :emojiPicker="true"
-            :avatarSrc="user.avatar"
-          ></index-box>
-          <div class="header">
-            <!-- 头像 -->
-            <div class="avatarBox">
-              <img :src="user.avatar" />
-            </div>
-            <!-- 用户名 -->
-            <div class="user">
-              <div class="name">
-                我是评论者:<span class="content">这是我评论的内容。</span>
-              </div>
-              <div class="other">2分钟前</div>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
   </section>
 </template>
 
 <script>
-import IndexBox from "./IndexBox.vue";
+import CommentList from "./child-comps/CommentList.vue";
 export default {
   name: "ContentShowCard",
   data() {
     return {
-      commentsShow: false,
+      commentShow: false,
+      author: {},
     };
   },
-  props: ["user", "content", "images"],
+  props: {
+    authorId: {
+      type: String,
+      required: true,
+    },
+    comments: Array,
+    content: {
+      type: String,
+      required: true,
+    },
+    images: Array,
+    userId: String,
+  },
   mounted() {},
+  computed: {
+    name() {
+      return this.author.login_name ? this.author.login_name : "用户未设置昵称";
+    },
+    location() {
+      return this.author.location ? this.author.location : "隐藏";
+    },
+  },
   components: {
-    IndexBox,
+    CommentList,
   },
 };
 </script>
@@ -103,7 +104,6 @@ span {
     .avatarBox {
       height: 40px;
       width: 40px;
-      background-color: red;
       border-radius: 50%;
       box-shadow: 0 0 4px rgba(0, 0, 0, 0.6);
       margin-top: 10px;
@@ -192,36 +192,4 @@ span {
   }
 }
 //#endregion
-.comments {
-  margin: 0 auto;
-  z-index: 0;
-  animation: show 0.5s;
-  transform: perspective(500px);
-  @keyframes show {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
-  }
-  .little.card {
-    border-radius: 0 0 20px 20px;
-    padding: 20px 10px 20px 10px;
-    margin-top: 0px;
-
-    font-weight: normal;
-    .name {
-      font-size: 14px;
-      color: #ed8060;
-      .content {
-        font-weight: 400;
-        color: black;
-      }
-    }
-    > .other {
-      font-size: 10px;
-    }
-  }
-}
 </style>
