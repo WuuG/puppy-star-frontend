@@ -5,7 +5,10 @@
       <layout-header></layout-header>
     </el-header>
     <!-- 主体 -->
-    <router-view></router-view>
+    <!-- 设置缓存避免卡顿 -->
+    <keep-alive>
+      <router-view></router-view>
+    </keep-alive>
     <!-- 底部 -->
     <back-to-top></back-to-top>
   </el-container>

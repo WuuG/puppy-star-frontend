@@ -1,14 +1,33 @@
 <template>
-  <div>这是用户个人主页。</div>
+  <content-layout>
+    <template #left>
+      <UserPageLeftAside></UserPageLeftAside>
+    </template>
+    <template #middle>
+      <keep-alive>
+        <router-view></router-view>
+      </keep-alive>
+    </template>
+    <template #right>
+      <UserPageRightAside></UserPageRightAside>
+    </template>
+  </content-layout>
 </template>
 
 <script>
+import ContentLayout from "@/components/content-layout/ContentLayout.vue";
+import UserPageRightAside from "./child-comps/UserPageRightAside.vue";
+import UserPageLeftAside from "./child-comps/UserPageLeftAside.vue";
 export default {
   data() {
     return {};
   },
   methods: {},
-  components: {},
+  components: {
+    ContentLayout,
+    UserPageLeftAside,
+    UserPageRightAside,
+  },
 };
 </script>
 

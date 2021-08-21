@@ -36,7 +36,7 @@ export default {
       //#region 一个卡片中的内容
       user: {
         name: "小明哥哥",
-        other: "发布于上海",
+        other: "3小时之前 发布于上海",
         avatar: testPic, //路径
         id: "001",
       },

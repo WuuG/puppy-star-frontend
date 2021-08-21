@@ -32,8 +32,7 @@
           <!-- 头像及用户名 -->
           <div id="avatarBox">
             <!-- 头像 -->
-            <!-- <el-avatar src="~@/assets/logo.png"></el-avatar> -->
-            <img src="~@/assets/logo.png" />
+            <img :src="userInfo.userAvatar || '~@/assets/logo.png'" />
           </div>
           <!-- 用户名 -->
           <div id="name">
@@ -63,7 +62,9 @@ export default {
         {
           iconClassName: "el-icon-house",
           path: "1",
-          args: {},
+          args: {
+            routerPath: "/home/subscriptions",
+          },
         },
         {
           iconClassName: "el-icon-goods",
@@ -83,7 +84,9 @@ export default {
         {
           iconClassName: "el-icon-user",
           path: "5",
-          args: {},
+          args: {
+            routerPath: "/user/myHomePage",
+          },
         },
       ],
       activeIconPath: "1",
@@ -105,6 +108,7 @@ export default {
     },
     toOtherPage(icon) {
       this.activeIconPath = icon.path;
+      this.$router.push(icon.args.routerPath);
     },
     activeIcon(event) {
       event.target.classList.add("icon-mask");
@@ -113,6 +117,7 @@ export default {
       event.target.classList.remove("icon-mask");
     },
     //#endregion
+    //#region 右侧
     // 登录 打开模态框
     login() {
       if (this.userInfo.userName == "") {
@@ -123,6 +128,7 @@ export default {
     closeTheLoginWindow() {
       this.loginWindowShow = false;
     },
+    //#endregion 右侧
   },
   directives: {},
 

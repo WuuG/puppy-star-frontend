@@ -11,8 +11,8 @@ const routes = [{
   children: [{
       path: "home",
       name: "HomePage",
-      component: () => import("../views/home-page/home-page.vue"),
       redirect: "/home/subscriptions",
+      component: () => import("../views/home-page/home-page.vue"),
       children: [{
           path: "subscriptions",
           name: "Subscriptions",
@@ -26,8 +26,17 @@ const routes = [{
     { // 个人中心
       path: "user",
       name: "user",
+      redirect: "/user/myHomePage",
       component: () =>
         import("../views/user-page/user-page.vue"),
+      children: [{
+          path: "myHomePage",
+          name: "MyHomePage",
+          component: () =>
+            import("../views/user-page/page-myHomePage/MyHomePage.vue"),
+        },
+
+      ],
     }
   ],
 }, ];

@@ -104,7 +104,6 @@ span {
     .avatarBox {
       height: 40px;
       width: 40px;
-      background-color: red;
       border-radius: 50%;
       box-shadow: 0 0 4px rgba(0, 0, 0, 0.6);
       margin-top: 10px;

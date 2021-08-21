@@ -9,10 +9,10 @@ export default new Vuex.Store({
     // 用户信息
     userInfo: {
       //用户名 密码 手机号 头像src
-      userName: "",
+      userName: "这是store中的用户名",
       userPassword: "",
       userPhone: "",
-      userAvatar: "",
+      userAvatar: "https://pic3.zhimg.com/22b797a33ce00581e37f9376cf37609b_is.jpg",
     },
   },
   mutations: {},
