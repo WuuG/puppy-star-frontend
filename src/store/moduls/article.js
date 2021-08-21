@@ -8,7 +8,13 @@ const state = {
   articleArray: [],
   test: "test",
   uniqueSet: new Set(),
+  articleNumber: 4,
+  articleParams: {
+    skip: 0,
+    limit: 4,
+  },
 };
+
 const mutations = {
   [ARTICLE_TEST](state) {
     console.log(state);
@@ -33,7 +39,11 @@ const mutations = {
     state.articleArray = [];
     state.uniqueSet.clear();
   },
+  [EVENT.ARTICLE_NUMBER_ADD](state) {
+    state.articleParams.skip += state.articleNumber;
+  },
 };
+
 const actions = {
   async [EVENT.ARTICLE_GET]({ commit }, params = { skip: 0, limit: 0 }) {
     const { data } = await getNewArticle(params.skip, params.limit);

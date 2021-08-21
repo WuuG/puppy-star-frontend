@@ -32,18 +32,12 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from "vuex";
+import { mapGetters, mapActions, mapState, mapMutations } from "vuex";
 import EVENT from "@/store/mutation-types";
 import { debounce } from "@/utils/utils";
 
 import IndexBox from "@/components/content/IndexBox.vue";
 import ContentShowCard from "@/components/content/ContentShowCard";
-
-const articleNumber = 4;
-const articlePrams = {
-  skip: 0,
-  limit: articleNumber,
-};
 
 export default {
   name: "Subscriptions",
@@ -56,6 +50,7 @@ export default {
   },
   computed: {
     ...mapGetters("article", ["articleArray"]),
+    ...mapState("article", ["articleNumber", "articleParams"]),
   },
   components: {
     IndexBox,
@@ -74,17 +69,19 @@ export default {
   methods: {
     async load() {
       this.loadingDisabled = true;
-      const res = await this.loadArticle(articlePrams);
+      const res = await this.loadArticle(this.articleParams);
       this.loadingDisabled = false;
       console.log(res);
       if (!res) {
-        console.error("没有跟多数据了");
         this.nomoreShow = true;
         return;
       }
       this.nomoreShow = false;
-      articlePrams.skip += articleNumber;
+      this.addArticleNumber();
     },
+    ...mapMutations("article", {
+      addArticleNumber: EVENT.ARTICLE_NUMBER_ADD,
+    }),
     ...mapActions("article", {
       loadArticle: EVENT.ARTICLE_GET,
     }),
