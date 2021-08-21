@@ -44,7 +44,10 @@
 </template>
 
 <script>
+import { getUserInfoById } from "@/api/user";
+
 import CommentList from "./child-comps/CommentList.vue";
+
 export default {
   name: "ContentShowCard",
   data() {
@@ -66,7 +69,9 @@ export default {
     images: Array,
     userId: String,
   },
-  mounted() {},
+  mounted() {
+    this.load();
+  },
   computed: {
     name() {
       return this.author.login_name ? this.author.login_name : "用户未设置昵称";
@@ -77,6 +82,16 @@ export default {
   },
   components: {
     CommentList,
+  },
+  methods: {
+    // 网络方法
+    async getAuthorInfo(id) {
+      const res = await getUserInfoById(id);
+      this.author = res;
+    },
+    load() {
+      this.getAuthorInfo(this.authorId);
+    },
   },
 };
 </script>

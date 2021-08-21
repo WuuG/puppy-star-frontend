@@ -26,7 +26,7 @@ export default {
   data() {
     return {
       //#region 一个卡片中的内容
-      id: "611d2e4632cb4a2d0fc1b800",
+      id: "611e97b50b6f0e68c9084734",
       content: "这是内容。",
       images: [testPic, testPic, testPic, testPic, testPic], //src数组
       //#endregion
