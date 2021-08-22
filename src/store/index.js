@@ -2,6 +2,7 @@ import Vue from "vue";
 import Vuex from "vuex";
 
 import article from "./moduls/article";
+import user from "./moduls/user";
 Vue.use(Vuex);
 
 export default new Vuex.Store({
@@ -19,5 +20,6 @@ export default new Vuex.Store({
   actions: {},
   modules: {
     article,
+    user,
   },
 });

@@ -1,42 +1,30 @@
 <template>
   <div>
     <el-menu
-      default-active="home"
-      v-for="({ title, sidebarData }, index) in data"
-      :key="title.id"
-      active-text-color="#ff6a5e"
+      :default-active="defaultActive"
       @select="onSelect"
+      class="left-aside-navbar"
     >
-      <template v-if="title">
-        <p :class="index ? 'headlineOther' : 'headlineOne'">{{ title }}</p>
-      </template>
-      <template v-for="menuOne in sidebarData">
-        <template v-if="menuOne.children">
-          <el-submenu :index="menuOne.index" :key="menuOne.id">
+      <h3 v-if="pageTitle" class="text-gray-800 px-5 text-2xl py-2 font-medium">
+        {{ pageTitle }}
+      </h3>
+      <template v-for="{ title, sidebarData } in data">
+        <template v-if="title">
+          <el-menu-item-group :key="title.id">
             <template #title>
-              <i :class="menuOne.icon"></i>
-              <span>
-                {{ menuOne.title }}
-              </span>
+              <h3 :class="titleClass">{{ title }}</h3>
             </template>
-            <el-menu-item
-              v-for="menuTwo in menuOne.children"
-              :key="menuTwo.id"
-              :index="menuTwo.index"
-            >
-              {{ menuTwo.title }}
-            </el-menu-item>
-          </el-submenu>
+            <nav-menu-item
+              :menus="sidebarData"
+              :key="sidebarData.id"
+            ></nav-menu-item>
+          </el-menu-item-group>
         </template>
         <template v-else>
-          <el-menu-item :index="menuOne.index" :key="menuOne.id">
-            <template #title>
-              <i :class="menuOne.icon"></i>
-              <span>
-                {{ menuOne.title }}
-              </span>
-            </template>
-          </el-menu-item>
+          <nav-menu-item
+            :menus="sidebarData"
+            :key="sidebarData.id"
+          ></nav-menu-item>
         </template>
       </template>
     </el-menu>
@@ -44,6 +32,7 @@
 </template>
 
 <script>
+import NavMenuItem from "./NavMenuItem.vue";
 export default {
   name: "NavMenu",
   props: {
@@ -51,27 +40,32 @@ export default {
       type: Array,
       required: true,
     },
+    defaultActive: String,
+    titleClass: {
+      type: String,
+      default: "text-gray-900 text-base",
+    },
+    pageTitle: String,
+  },
+  components: {
+    NavMenuItem,
   },
   methods: {
-    onSelect(index) {
-      this.$emit("select", index);
+    onSelect(item) {
+      this.$emit("select", item);
     },
   },
 };
 </script>
 
 <style lang="scss" scoped>
-.headlineOne,
-.headlineOther {
-  padding: 0 20px;
-}
-.headlineOne {
-  font-size: 20px;
-  color: $color-text-primary;
-  font-weight: 600;
-}
-.headlineOther {
-  font-size: 16px;
-  color: $color-text-regular;
+</style>
+<style lang="scss">
+.left-aside-navbar {
+  .el-menu-item {
+    &:hover {
+      background-color: #f2f2f2;
+    }
+  }
 }
 </style>

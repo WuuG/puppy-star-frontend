@@ -6,7 +6,8 @@ import axios from "axios";
 import { Message } from "element-ui";
 // import store from "@/store";
 
-const baseURL = "https://qcwwpx.app.cloudendpoint.cn/api";
+// const baseURL = "https://qcwwpx.app.cloudendpoint.cn/api";
+const baseURL = "/local";
 
 // create an axios instance
 const service = axios.create({
@@ -50,8 +51,8 @@ service.interceptors.response.use(
   (response) => {
     const res = response.data;
 
-    // if the custom code is not 200, it is judged as an error.
-    if (response.status !== 200) {
+    if (response.status < 200 && response.status >= 300) {
+      console.log(res);
       Message({
         message: res.message || "Error",
         type: "error",
@@ -60,15 +61,16 @@ service.interceptors.response.use(
 
       // Centralized error handling
 
-      return Promise.reject(new Error(res.message || "Error"));
+      return Promise.reject(new Error(res || "Error"));
     } else {
       return res;
     }
   },
   (error) => {
     console.log("err" + error); // for debug
+    const message = error.response?.data;
     Message({
-      message: error.message,
+      message: message || error.message,
       type: "error",
       duration: 5 * 1000,
     });

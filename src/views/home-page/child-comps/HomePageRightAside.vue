@@ -32,7 +32,7 @@
 </template>
 
 <script>
-import ArticleRecommand from "@/components/content/CardList.vue";
+import ArticleRecommand from "@/components/content/ArticleList.vue";
 import EVENT from "@/store/mutation-types";
 
 export default {
@@ -114,7 +114,7 @@ export default {
   },
   methods: {
     reload() {
-      this.$store.dispatch(EVENT.DISPATH_ARTICLE_GET);
+      this.$store.dispatch(EVENT.DISPATH_ARTICLE_GET, { skip: 2, limit: 2 });
     },
     onArticle(article) {
       console.log(article);
