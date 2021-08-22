@@ -58,7 +58,6 @@ export default {
   margin: 0 auto;
   z-index: 0;
   animation: show 0.5s;
-  transform: perspective(500px);
   @keyframes show {
     from {
       opacity: 0;

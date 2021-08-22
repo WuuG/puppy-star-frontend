@@ -1,8 +1,8 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 Vue.use(VueRouter);
-// const article = () =>
-//   import("../views/home-page/subscriptions/article/article.vue");
+const article = () =>
+  import("../views/home-page/subscriptions/article/article.vue");
 
 const routes = [{
   path: "/",
@@ -16,13 +16,16 @@ const routes = [{
       redirect: "/home/subscriptions",
       component: () => import("../views/home-page/home-page.vue"),
       children: [{
-          path: "subscriptions",
-          name: "Subscriptions",
-          component: () =>
-            import("../views/home-page/subscriptions/Subscriptions.vue"),
-        },
-
-      ],
+        path: "subscriptions",
+        name: "Subscriptions",
+        component: () =>
+          import("../views/home-page/subscriptions/Subscriptions.vue"),
+        children: [{
+          path: "type/:type",
+          name: "type",
+          component: article,
+        }, ],
+      }, ],
 
     },
     { // 个人中心

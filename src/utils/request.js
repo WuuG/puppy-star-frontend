@@ -3,11 +3,13 @@
  * 地址:https://github.com/PanJiaChen/vue-element-admin
  */
 import axios from "axios";
-import { Message } from "element-ui";
+import {
+  Message
+} from "element-ui";
 // import store from "@/store";
 
 // const baseURL = "https://qcwwpx.app.cloudendpoint.cn/api";
-const baseURL = "/local";
+const baseURL = "http://localhost:8080";
 
 // create an axios instance
 const service = axios.create({
@@ -68,7 +70,7 @@ service.interceptors.response.use(
   },
   (error) => {
     console.log("err" + error); // for debug
-    const message = error.response?.data;
+    const message = error.response.data;
     Message({
       message: message || error.message,
       type: "error",
