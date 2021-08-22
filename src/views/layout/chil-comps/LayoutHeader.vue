@@ -36,7 +36,7 @@
           </div>
           <!-- 用户名 -->
           <div id="name">
-            {{ userInfo.userName || "点击此处登录" }}
+            {{ userName || "点击此处登录" }}
           </div>
         </div>
       </template>
@@ -92,7 +92,9 @@ export default {
     };
   },
   computed: {
-    ...mapState(["userInfo"]),
+    ...mapState("user", {
+      userName: "name",
+    }),
   },
   methods: {
     //#region
@@ -114,7 +116,7 @@ export default {
     //#endregion
     // 登录 打开模态框
     login() {
-      if (this.userInfo.userName == "") {
+      if (this.userName == "") {
         this.loginWindowShow = true;
       }
     },

@@ -23,17 +23,11 @@
         {{ item.status }}
       </template>
     </article-recommand>
-    <article-recommand :data="articleData">
-      <template #title="{ item }">
-        {{ item.title }}
-      </template>
-    </article-recommand>
   </div>
 </template>
 
 <script>
 import ArticleRecommand from "@/components/content/ArticleList.vue";
-import EVENT from "@/store/mutation-types";
 
 export default {
   name: "HomePageRigthAside",
@@ -113,9 +107,7 @@ export default {
     ArticleRecommand,
   },
   methods: {
-    reload() {
-      this.$store.dispatch(EVENT.DISPATH_ARTICLE_GET, { skip: 2, limit: 2 });
-    },
+    reload() {},
     onArticle(article) {
       console.log(article);
     },

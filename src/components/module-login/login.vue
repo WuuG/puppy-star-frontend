@@ -55,7 +55,7 @@
                 type="warning"
                 round
                 :loading="logining"
-                @click="submit"
+                @click="onLogin"
                 >登录</el-button
               >
               <el-button
@@ -94,6 +94,15 @@
                 style="width: 250px"
               ></el-input>
             </el-form-item>
+            <el-form-item label="用户名" prop="userName">
+              <el-input
+                type="text"
+                v-model="form.userName"
+                auto-complete="off"
+                placeholder="请输入用户名"
+                style="width: 250px"
+              ></el-input>
+            </el-form-item>
             <!-- 验证码 -->
             <el-form-item label="验证码" prop="code">
               <el-input
@@ -120,7 +129,8 @@
                 type="warning"
                 round
                 :loading="logining"
-                >登录</el-button
+                @click="onRegister"
+                >注册</el-button
               >
               <el-button
                 class="register"
@@ -143,11 +153,13 @@
 import anime from "animejs";
 import axios from "axios";
 import { debounce } from "@/utils/utils.js";
+import { setLocalStorage, key } from "@/utils/localStorage";
 // 后台地址
 const baseUrl = "https://qcwwpx.fn.thelarkcloud.com/";
 //手机号正则
 const phoneNumberReg =
   /^(13[0-9]|14[01456879]|15[0-35-9]|16[2567]|17[0-8]|18[0-9]|19[0-35-9])\d{8}$/;
+import { postRegister, postLogin } from "@/api/passport";
 
 export default {
   data() {
@@ -172,7 +184,7 @@ export default {
         userName: "", //用户名
         userPassword: "", //登录密码
         // 注册
-        userPhone: "", //手机号
+        userPhone: "", // 手机号
         code: "", //验证码
       },
       ruleForm: {
@@ -205,9 +217,33 @@ export default {
     };
   },
   methods: {
+    // 网络方法
+    async postRegister(form) {
+      const submitForm = {
+        login_name: form.userName,
+        phone: form.userPhone,
+        code: form.code,
+        password: form.userPassword,
+      };
+      await postRegister(submitForm);
+      this.onLogin();
+    },
+    async postLogin(form) {
+      const submitForm = {
+        login_name: form.userName,
+        password: form.userPassword,
+      };
+      const res = await postLogin(submitForm);
+      setLocalStorage(key.TOKEN, res._id);
+      setLocalStorage(key.USER_INFO, res);
+      this.$router.go(0);
+    },
     // 提交表单——点击登录按钮
-    submit: debounce(function () {
-      console.log(this);
+    onLogin: debounce(function () {
+      this.postLogin(this.form);
+    }, 500),
+    onRegister: debounce(function () {
+      this.postRegister(this.form);
     }, 500),
 
     // 前往注册或登录页面
