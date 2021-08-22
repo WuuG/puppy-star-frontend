@@ -5,6 +5,7 @@ const { ARTICLE_TEST } = EVENT;
 const state = {
   test: "test",
   firstLoading: false,
+  resetTime: 1,
 };
 
 const mutations = {

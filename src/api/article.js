@@ -9,3 +9,11 @@ export function getNewArticle(skip, limit) {
     },
   });
 }
+
+export function postArticle(form) {
+  return request({
+    url: "article",
+    method: "post",
+    data: form,
+  });
+}

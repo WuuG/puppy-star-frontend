@@ -14,6 +14,7 @@
 <script>
 import IndexBox from "@/components/content/IndexBox.vue";
 import { uploadImage } from "@/api/upload-file";
+import { postArticle } from "@/api/article";
 import { mapState } from "vuex";
 
 export default {
@@ -33,10 +34,23 @@ export default {
       if (!data || data.length <= 0) throw new Error("can't get files");
       return data[0].url;
     },
+    /**
+     * 点击提交时进行处理的函数
+     * @form text 文本
+     * @form iamges 图片数组
+     */
     async submit(form) {
-      console.log(form);
-      console.log(this.id);
-      return false;
+      const submitForm = {
+        text: form.text,
+        images: form.images,
+        id: this.id,
+      };
+      try {
+        await postArticle(submitForm);
+        return true;
+      } catch {
+        return false;
+      }
     },
   },
 };

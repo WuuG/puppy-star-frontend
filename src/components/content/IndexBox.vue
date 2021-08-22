@@ -39,6 +39,7 @@
             type="primary"
             round
             :disabled="sendBtnDisabled"
+            :loading="submitLoading"
             @click="onSubmit"
             >{{ btnText }}
           </el-button>
@@ -62,6 +63,7 @@ export default {
       textSelectionStart: 0,
       imagesFile: [],
       imagesURL: [],
+      submitLoading: false,
     };
   },
   props: {
@@ -120,15 +122,18 @@ export default {
         text: this.text,
         images: this.imagesURL,
       };
+      this.submitLoading = true;
       const res = await this.submit(form);
+      this.submitLoading = false;
       if (!res) return;
-      this.$refs["upload"].clearImages();
+      this.$refs["upload"].clearImages([]);
+      this.resetText();
     },
     // 子组件通信
     async onShowUpload() {
       this.$refs["upload"].click();
     },
-    // 父组件通信
+    // 子组件http-request
     async httpRequest(param, ref, _this) {
       // this.$emit("http-request", param, ref, _this);
       const file = param.file;
@@ -146,6 +151,9 @@ export default {
           _this.showUpload = false;
         }
       }
+    },
+    resetText() {
+      this.text = "";
     },
   },
 };

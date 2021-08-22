@@ -16,7 +16,7 @@
     >
       <i class="el-icon-plus upload-plus-icon" ref="trigger"></i>
     </el-upload>
-    <el-dialog :visible.sync="dialogVisible">
+    <el-dialog :visible.sync="dialogVisible" width="80vw">
       <img width="100%" :src="dialogImageUrl" alt="" />
     </el-dialog>
   </div>
@@ -58,8 +58,9 @@ export default {
       this.dialogImageUrl = file.url;
       this.dialogVisible = true;
     },
-    clearImages() {
+    clearImages(fileList) {
       this.$refs["upload"].clearFiles();
+      this.fileListChangeHandler(fileList);
     },
     onExceed() {
       this.$message({
