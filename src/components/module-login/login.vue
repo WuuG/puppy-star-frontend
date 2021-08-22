@@ -247,9 +247,9 @@ export default {
       const res = await sendMessage(form);
       let type = "success";
       // ↓根据后端回来的数据 调整
-      if (res.data.success == false) type = "error";
+      if (res.success == false) type = "error";
       this.$message({
-        message: res.data.message,
+        message: res.message,
         type: type,
       });
       //3.设置按钮禁用状态
