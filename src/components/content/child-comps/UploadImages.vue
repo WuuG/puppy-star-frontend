@@ -50,6 +50,7 @@ export default {
   },
   methods: {
     handleRemove(file, fileList) {
+      this.$emit("remove", fileList);
       setTimeout(() => {
         this.fileListChangeHandler(fileList);
       }, 1000);

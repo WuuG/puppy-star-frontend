@@ -38,14 +38,17 @@ export default {
     /**
      * 点击提交时进行处理的函数
      * @form text 文本
-     * @form iamges 图片数组
+     * @form iamges 图片数组 [{uid,url}...]
      */
     async submit(form) {
       const submitForm = {
         text: form.text,
-        images: form.images,
         id: this.id,
+        images: [],
       };
+      form.images.forEach((imageObjec) => {
+        submitForm.images.push(imageObjec.url);
+      });
       try {
         await postArticle(submitForm);
         this.reLoadArticle();

@@ -18,6 +18,7 @@
         v-if="imageUpload"
         :auto-upload="autoUpload"
         @http-request="httpRequest"
+        @remove="handleImageRemove"
       ></upload-images>
       <div class="index-box-options">
         <ul class="left">
@@ -141,7 +142,7 @@ export default {
       form.append("files", file);
       try {
         const url = await this.uploadImageFunction(form);
-        this.imagesURL.push(url);
+        this.imagesURL.push({ uid: file.uid, url: url });
       } catch (error) {
         console.log("upload image http error", error);
         ref.uploadFiles = ref.uploadFiles.filter(
@@ -152,8 +153,30 @@ export default {
         }
       }
     },
+    /**
+     * 重置文本和imagesURL
+     */
     resetText() {
       this.text = "";
+      this.imagesURL = [];
+    },
+    /**
+     * 处理文件移除时的 imagesURL, 通过先后uid的比较来判断，若是都不匹配，则移除最后一个
+     * @fileList 还剩余的文件
+     * @this imagesURL 在最后submit时，需要发送的url内容
+     * @removeIndex 需要移除的index
+     */
+    handleImageRemove(fileList) {
+      let removeIndex = this.imagesURL.length - 1;
+      for (const i in fileList) {
+        console.log(fileList[i].uid, this.imagesFile[i].uid);
+        if (fileList[i].uid !== this.imagesURL[i].uid) {
+          removeIndex = i;
+        }
+      }
+      console.log(removeIndex);
+      this.imagesURL.splice(removeIndex, 1);
+      debugger;
     },
   },
 };
