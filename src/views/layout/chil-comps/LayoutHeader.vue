@@ -64,36 +64,30 @@ export default {
       icons: [
         {
           iconClassName: "el-icon-house",
-          path: "1",
-          args: {
-            routerPath: "/home/subscriptions",
-          },
+          path: "/home/subscriptions",
+          args: {},
         },
         {
           iconClassName: "el-icon-goods",
-          path: "2",
+          path: "1",
           args: {},
         },
         {
           iconClassName: "el-icon-view",
-          path: "3",
+          path: "2",
           args: {},
         },
         {
           iconClassName: "el-icon-document-copy",
-          path: "4",
+          path: "3",
           args: {},
         },
         {
           iconClassName: "el-icon-user",
-          path: "5",
-          args: {
-            routerPath: "/user/myHomePage",
-          },
+          path: "/user/myHomePage",
+          args: {},
         },
       ],
-      activeIconPath: "1",
-
       // 控制模态登录框的开关
       loginWindowShow: false,
       // 退出登录
@@ -104,6 +98,10 @@ export default {
     ...mapState("user", {
       userName: "name",
     }),
+    activeIconPath() {
+      console.log(this.$route.matched[2].path);
+      return this.$route.matched[2].path;
+    },
   },
   methods: {
     //#region
@@ -114,8 +112,9 @@ export default {
       };
     },
     toOtherPage(icon) {
-      this.activeIconPath = icon.path;
-      this.$router.push(icon.args.routerPath);
+      if (icon.path < 100) return;
+      if (icon.path === this.$route.matched[2].path) return;
+      this.$router.push(icon.path);
     },
     activeIcon(event) {
       event.target.classList.add("icon-mask");

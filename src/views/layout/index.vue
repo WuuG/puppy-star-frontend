@@ -5,7 +5,7 @@
       <layout-header></layout-header>
     </el-header>
     <!-- 主体 -->
-    <!-- 设置缓存避免卡顿,去掉keep-alive，keep-alve就会导致，不会重新刷新页面 -->
+    <!-- 设置缓存避免卡顿 -->
     <keep-alive>
       <router-view></router-view>
     </keep-alive>
