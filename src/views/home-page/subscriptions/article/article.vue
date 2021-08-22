@@ -43,6 +43,7 @@ import { getNewArticle } from "@/api/article";
 import { debounce } from "@/utils/utils";
 
 import ContentShowCard from "@/components/content/ContentShowCard";
+import { mapState } from "vuex";
 
 const articleNumber = 4;
 export default {
@@ -60,6 +61,11 @@ export default {
       firstLoading: true,
     };
   },
+  computed: {
+    ...mapState("article", {
+      uploadArticle: "resetTime",
+    }),
+  },
   components: {
     ContentShowCard,
   },
@@ -69,7 +75,6 @@ export default {
   },
   destroyed() {
     window.removeEventListener("scroll", this.windowScrollHandler);
-    console.log(1);
   },
   methods: {
     // 网络方法
@@ -126,6 +131,12 @@ export default {
       this.firstLoading = true;
       this.resetArticle();
       console.log("route change");
+    },
+    // 监听是否有上传文章，如果上传就resetArticle()
+    uploadArticle: function () {
+      console.log("reload");
+      this.firstLoading = true;
+      this.resetArticle();
     },
   },
 };

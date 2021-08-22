@@ -15,7 +15,8 @@
 import IndexBox from "@/components/content/IndexBox.vue";
 import { uploadImage } from "@/api/upload-file";
 import { postArticle } from "@/api/article";
-import { mapState } from "vuex";
+import { mapMutations, mapState } from "vuex";
+import EVENT from "@/store/mutation-types";
 
 export default {
   name: "Subscriptions",
@@ -47,11 +48,15 @@ export default {
       };
       try {
         await postArticle(submitForm);
+        this.reLoadArticle();
         return true;
       } catch {
         return false;
       }
     },
+    ...mapMutations("article", {
+      reLoadArticle: EVENT.COMMIT_RELOAD,
+    }),
   },
 };
 </script>

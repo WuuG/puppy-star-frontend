@@ -5,7 +5,7 @@ const { ARTICLE_TEST } = EVENT;
 const state = {
   test: "test",
   firstLoading: false,
-  resetTime: 1,
+  resetTime: 0,
 };
 
 const mutations = {
@@ -14,6 +14,9 @@ const mutations = {
   },
   [EVENT.CHANGE_LOADING](state, boolean) {
     state.firstLoading = boolean;
+  },
+  [EVENT.COMMIT_RELOAD](state) {
+    state.resetTime++;
   },
 };
 
