@@ -7,11 +7,12 @@
       :class="uploadClass"
       :limit="5"
       :multiple="true"
-      :auto-upload="false"
+      :auto-upload="autoUpload"
       :on-preview="handlePictureCardPreview"
       :on-remove="handleRemove"
       :on-change="onChange"
       :on-exceed="onExceed"
+      :http-request="httpRequest"
     >
       <i class="el-icon-plus upload-plus-icon" ref="trigger"></i>
     </el-upload>
@@ -34,6 +35,10 @@ export default {
   },
   props: {
     files: Array,
+    autoUpload: {
+      type: Boolean,
+      default: true,
+    },
   },
   computed: {
     uploadClass() {
@@ -72,6 +77,9 @@ export default {
     },
     async click() {
       this.$refs["trigger"].click();
+    },
+    httpRequest(param) {
+      this.$emit("http-request", param, this.$refs["upload"], this);
     },
   },
 };

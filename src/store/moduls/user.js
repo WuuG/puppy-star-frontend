@@ -8,7 +8,7 @@ const state = {
     userInfo?.avatar ||
     "https://pic3.zhimg.com/22b797a33ce00581e37f9376cf37609b_is.jpg",
   location: userInfo?.location || "",
-  id: "111",
+  id: userInfo._id || "",
 };
 const mutations = {};
 const actions = {};

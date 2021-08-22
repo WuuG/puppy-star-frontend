@@ -16,6 +16,8 @@
         :files.sync="imagesFile"
         ref="upload"
         v-if="imageUpload"
+        :auto-upload="autoUpload"
+        @http-request="httpRequest"
       ></upload-images>
       <div class="index-box-options">
         <ul class="left">
@@ -37,7 +39,7 @@
             type="primary"
             round
             :disabled="sendBtnDisabled"
-            @click="submit"
+            @click="onSubmit"
             >{{ btnText }}
           </el-button>
         </div>
@@ -59,6 +61,7 @@ export default {
       text: "",
       textSelectionStart: 0,
       imagesFile: [],
+      imagesURL: [],
     };
   },
   props: {
@@ -87,6 +90,12 @@ export default {
       type: String,
       default: "",
     },
+    autoUpload: {
+      type: Boolean,
+      default: true,
+    },
+    uploadImageFunction: Function,
+    submit: Function,
   },
   computed: {
     sendBtnDisabled: function () {
@@ -106,9 +115,13 @@ export default {
     onBlur(event) {
       this.textSelectionStart = event.srcElement.selectionStart;
     },
-    submit() {
-      console.log(this.imagesFile);
-      console.log(this.text);
+    async onSubmit() {
+      const form = {
+        text: this.text,
+        images: this.imagesURL,
+      };
+      const res = await this.submit(form);
+      if (!res) return;
       this.$refs["upload"].clearImages();
     },
     // 子组件通信
@@ -116,6 +129,24 @@ export default {
       this.$refs["upload"].click();
     },
     // 父组件通信
+    async httpRequest(param, ref, _this) {
+      // this.$emit("http-request", param, ref, _this);
+      const file = param.file;
+      const form = new FormData();
+      form.append("files", file);
+      try {
+        const url = await this.uploadImageFunction(form);
+        this.imagesURL.push(url);
+      } catch (error) {
+        console.log("upload image http error", error);
+        ref.uploadFiles = ref.uploadFiles.filter(
+          (uploadFile) => uploadFile.uid !== file.uid
+        );
+        if (ref.uploadFiles.length <= 0) {
+          _this.showUpload = false;
+        }
+      }
+    },
   },
 };
 </script>
