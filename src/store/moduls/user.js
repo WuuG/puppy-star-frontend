@@ -1,10 +1,13 @@
 // import EVENT from "../mutation-types";
 import { getLocalStorage, key } from "@/utils/localStorage.js";
 
+const userInfo = getLocalStorage(key.USER_INFO);
 const state = {
-  name: getLocalStorage(key.USER_INFO)?.login_name || "",
-  avatar: "https://pic3.zhimg.com/22b797a33ce00581e37f9376cf37609b_is.jpg",
-  location: null,
+  name: userInfo?.login_name || "",
+  avatar:
+    userInfo?.avatar ||
+    "https://pic3.zhimg.com/22b797a33ce00581e37f9376cf37609b_is.jpg",
+  location: userInfo?.location || "",
   id: "111",
 };
 const mutations = {};

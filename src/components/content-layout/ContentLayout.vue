@@ -18,7 +18,11 @@
         <slot name="middle"></slot>
       </el-col>
     </el-main>
-    <div class="app-right-aside hidden-md-and-down" v-if="showRightAside">
+    <div
+      class="app-right-aside hidden-md-and-down"
+      v-if="showRightAside"
+      width="256px"
+    >
       <slot name="right"> </slot>
     </div>
   </el-container>
@@ -64,9 +68,5 @@ export default {
   .app-content {
     border-radius: 4px;
   }
-}
-.app-right-aside {
-  flex-grow: 0;
-  width: 280px;
 }
 </style>

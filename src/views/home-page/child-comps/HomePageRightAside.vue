@@ -3,7 +3,7 @@
     <article-recommand
       title="星球热搜"
       footer="查看完整的星球动态"
-      class="rounded-sm bg-white"
+      class="rounded-sm bg-white w-64"
       :data="articleData"
       :trend="true"
       :leftIndex="true"

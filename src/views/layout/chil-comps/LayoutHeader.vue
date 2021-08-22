@@ -28,16 +28,19 @@
       </template>
       <!-- 右侧 用户区 -->
       <template #right>
-        <div id="user" @click.stop="login">
+        <div id="user" @click.stop="login" class="flex items-center">
           <!-- 头像及用户名 -->
-          <div id="avatarBox">
-            <!-- 头像 -->
-            <img src="~@/assets/logo.png" />
-          </div>
           <!-- 用户名 -->
           <div id="name">
             {{ userName || "点击此处登录" }}
           </div>
+          <div id="avatarBox" class="mr-2">
+            <!-- 头像 -->
+            <img src="~@/assets/logo.png" />
+          </div>
+          <el-button v-show="userName" size="small" @click="onQuit">
+            退出登录
+          </el-button>
         </div>
       </template>
     </v-header>
@@ -89,6 +92,8 @@ export default {
 
       // 控制模态登录框的开关
       loginWindowShow: false,
+      // 退出登录
+      quitCardShow: false,
     };
   },
   computed: {
@@ -118,11 +123,17 @@ export default {
     login() {
       if (this.userName == "") {
         this.loginWindowShow = true;
+        return;
       }
+      this.quitCardShow = true;
     },
     // 关闭模态框
     closeTheLoginWindow() {
       this.loginWindowShow = false;
+    },
+    onQuit() {
+      localStorage.clear();
+      this.$router.go(0);
     },
   },
   directives: {},
@@ -187,13 +198,10 @@ export default {
   cursor: pointer;
   // 头像框
   #avatarBox {
-    float: right;
     height: 40px;
     width: 40px;
-    background-color: red;
     border-radius: 50%;
     box-shadow: 0 0 4px rgba(0, 0, 0, 0.6);
-    margin-top: 10px;
     border: 1px solid #fff;
     overflow: hidden;
     transition: all 0.5s;

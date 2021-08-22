@@ -43,9 +43,4 @@ export default {
   max-width: $width-content;
 }
 //#endregion
-
-// 用户部分
-.header-right {
-  width: 175px;
-}
 </style>

@@ -15,3 +15,13 @@ export function postLogin(form) {
     method: "post",
   });
 }
+
+export function sendMessage(phone) {
+  return request({
+    url: "messageCode/sendMessageCode",
+    data: {
+      phone,
+    },
+    method: "post",
+  });
+}

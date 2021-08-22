@@ -90,7 +90,7 @@
                 type="text"
                 v-model="form.userPhone"
                 auto-complete="off"
-                placeholder="请输入手机号"
+                placeholder="请输入邀请人手机号"
                 style="width: 250px"
               ></el-input>
             </el-form-item>
@@ -101,6 +101,14 @@
                 auto-complete="off"
                 placeholder="请输入用户名"
                 style="width: 250px"
+              ></el-input>
+            </el-form-item>
+            <el-form-item label="密码" prop="userPassword">
+              <el-input
+                type="password"
+                v-model="form.userPassword"
+                auto-complete="off"
+                placeholder="请输入密码"
               ></el-input>
             </el-form-item>
             <!-- 验证码 -->
@@ -151,15 +159,12 @@
 
 <script>
 import anime from "animejs";
-import axios from "axios";
 import { debounce } from "@/utils/utils.js";
 import { setLocalStorage, key } from "@/utils/localStorage";
-// 后台地址
-const baseUrl = "https://qcwwpx.fn.thelarkcloud.com/";
+import { postRegister, postLogin, sendMessage } from "@/api/passport";
 //手机号正则
 const phoneNumberReg =
   /^(13[0-9]|14[01456879]|15[0-35-9]|16[2567]|17[0-8]|18[0-9]|19[0-35-9])\d{8}$/;
-import { postRegister, postLogin } from "@/api/passport";
 
 export default {
   data() {
@@ -238,6 +243,33 @@ export default {
       setLocalStorage(key.USER_INFO, res);
       this.$router.go(0);
     },
+    async sendMessage(form) {
+      const res = await sendMessage(form);
+      let type = "success";
+      // ↓根据后端回来的数据 调整
+      if (res.data.success == false) type = "error";
+      this.$message({
+        message: res.data.message,
+        type: type,
+      });
+      //3.设置按钮禁用状态
+      if (type == "success")
+        if (!this.getCodeTimer) {
+          this.getCodeCount = 60;
+          this.getCodeButtonDisabled = true;
+          this.timer = setInterval(() => {
+            if (this.getCodeCount > 0 && this.getCodeCount <= 60) {
+              this.getCodeCount--;
+              this.getCodeText = `${this.getCodeCount}s`;
+            } else {
+              this.getCodeButtonDisabled = false;
+              clearInterval(this.timer);
+              this.getCodeTimer = null;
+              this.getCodeText = "重新获取验证码";
+            }
+          }, 1000);
+        }
+    },
     // 提交表单——点击登录按钮
     onLogin: debounce(function () {
       this.postLogin(this.form);
@@ -283,48 +315,7 @@ export default {
         console.log("手机号格式不正确");
         return;
       }
-      // 2.发送axios请求获取验证码sendMessageCode云函数
-      axios({
-        method: "post",
-        url: baseUrl + "sendMessageCode",
-        data: {
-          phone: this.form.userPhone,
-        },
-      })
-        .then((res) => {
-          console.log(res);
-          let type = "success";
-          // ↓根据后端回来的数据 调整
-          if (res.data.success == false) type = "error";
-          this.$message({
-            message: res.data.message,
-            type: type,
-          });
-          //3.设置按钮禁用状态
-          if (type == "success")
-            if (!this.getCodeTimer) {
-              this.getCodeCount = 60;
-              this.getCodeButtonDisabled = true;
-              this.timer = setInterval(() => {
-                if (this.getCodeCount > 0 && this.getCodeCount <= 60) {
-                  this.getCodeCount--;
-                  this.getCodeText = `${this.getCodeCount}s`;
-                } else {
-                  this.getCodeButtonDisabled = false;
-                  clearInterval(this.timer);
-                  this.getCodeTimer = null;
-                  this.getCodeText = "重新获取验证码";
-                }
-              }, 1000);
-            }
-        })
-        .catch((err) => {
-          console.log(err);
-          this.$message({
-            message: "网络异常",
-            type: "error",
-          });
-        });
+      this.sendMessage(this.form.userPhone);
     }, 1000),
   },
   // 实现窗口的模态
@@ -363,7 +354,7 @@ export default {
     width: 50vw;
     height: 25vw;
     min-width: 375px;
-    min-height: 300px;
+    min-height: 370px;
     position: relative;
     display: flex;
     justify-content: flex-end;
