@@ -151,9 +151,14 @@ export default {
       return (index) => {
         const baseClass = "text-base mx-1 inline-block text-center w-5";
         const rank = ranky(index, this.data, 3);
-        let className = "text-red-" + (500 - rank * 100);
-        if (rank === 1) {
-          className += " font-bold";
+        let className = "";
+        // 这里需要返回完整的类名，否则tailwindcss会将这个类purge掉，在打包后这个类会消失
+        if (rank <= 1) {
+          className = "text-red-500 font-bold";
+        } else if (rank <= 2) {
+          className = "text-red-400";
+        } else if (rank <= 3) {
+          className = "text-red-300";
         }
         return [baseClass, className].join(" ");
       };
