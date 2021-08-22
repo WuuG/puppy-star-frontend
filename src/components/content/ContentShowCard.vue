@@ -16,8 +16,9 @@
       </div>
       <div class="content">
         <div class="text">{{ content }}</div>
-        <div>
-          <viewer :images="images" class="image">
+
+        <div class="image">
+          <viewer :images="images" style="display: flex; flex-wrap: wrap">
             <img v-for="(src, index) in images" :key="index" :src="src" />
           </viewer>
         </div>
@@ -130,6 +131,7 @@ span {
       img {
         height: 100%;
         width: 100%;
+        object-fit: cover;
       }
       &:hover {
         transform: scale(1.1);
@@ -180,6 +182,14 @@ span {
         border-radius: 10px;
         &:hover {
           opacity: 0.7;
+        }
+        @media (max-width: 420px) {
+          width: 80px;
+          height: 80px;
+        }
+        @media (max-width: 310px) {
+          width: 50px;
+          height: 50px;
         }
       }
     }

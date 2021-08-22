@@ -4,14 +4,18 @@
     <el-header class="header">
       <layout-header></layout-header>
     </el-header>
-    <router-view></router-view>
+    <!-- 主体 -->
+    <!-- 设置缓存避免卡顿,去掉keep-alive，keep-alve就会导致，不会重新刷新页面 -->
+    <keep-alive>
+      <router-view></router-view>
+    </keep-alive>
     <!-- 底部 -->
     <back-to-top></back-to-top>
   </el-container>
 </template>
 <script>
 import LayoutHeader from "./chil-comps/LayoutHeader.vue";
-import BackToTop from "@/components/footer/backToTop.vue";
+import BackToTop from "@/components/footer/BackToTop.vue";
 
 export default {
   name: "Layout",

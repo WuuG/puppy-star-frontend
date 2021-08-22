@@ -54,7 +54,7 @@
 
 <script>
 import VHeader from "@/components/header/Header.vue";
-import LoginWindow from "@/components/module-login/login.vue";
+import LoginWindow from "@/components/module-login/Login.vue";
 
 import { mapState } from "vuex";
 export default {
@@ -65,7 +65,9 @@ export default {
         {
           iconClassName: "el-icon-house",
           path: "1",
-          args: {},
+          args: {
+            routerPath: "/home/subscriptions",
+          },
         },
         {
           iconClassName: "el-icon-goods",
@@ -85,7 +87,9 @@ export default {
         {
           iconClassName: "el-icon-user",
           path: "5",
-          args: {},
+          args: {
+            routerPath: "/user/myHomePage",
+          },
         },
       ],
       activeIconPath: "1",
@@ -111,6 +115,7 @@ export default {
     },
     toOtherPage(icon) {
       this.activeIconPath = icon.path;
+      this.$router.push(icon.args.routerPath);
     },
     activeIcon(event) {
       event.target.classList.add("icon-mask");
@@ -119,6 +124,7 @@ export default {
       event.target.classList.remove("icon-mask");
     },
     //#endregion
+    //#region 右侧
     // 登录 打开模态框
     login() {
       if (this.userName == "") {
@@ -135,6 +141,7 @@ export default {
       localStorage.clear();
       this.$router.go(0);
     },
+    //#endregion 右侧
   },
   directives: {},
 
@@ -209,6 +216,7 @@ export default {
     img {
       height: 100%;
       width: 100%;
+      object-fit: cover;
     }
     &:hover {
       transform: scale(1.1);
@@ -226,7 +234,6 @@ export default {
     white-space: nowrap;
     -o-text-overflow: ellipsis;
     margin-right: 10px;
-    // background-color: pink;
     overflow: hidden;
   }
   @media (max-width: 750px) {

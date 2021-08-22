@@ -10,7 +10,6 @@ const routes = [
     redirect: "home",
     name: "Layout",
     component: () => import("../views/layout/index.vue"),
-
     children: [
       {
         path: "home",
@@ -31,6 +30,21 @@ const routes = [
                 component: article,
               },
             ],
+          },
+        ],
+      },
+      {
+        // 个人中心
+        path: "user",
+        name: "user",
+        redirect: "/user/myHomePage",
+        component: () => import("../views/user-page/user-page.vue"),
+        children: [
+          {
+            path: "myHomePage",
+            name: "MyHomePage",
+            component: () =>
+              import("../views/user-page/page-myHomePage/MyHomePage.vue"),
           },
         ],
       },

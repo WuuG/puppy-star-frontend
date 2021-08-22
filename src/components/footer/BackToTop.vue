@@ -46,6 +46,7 @@ export default {
   color: $color-lightRed;
   border-radius: 50%;
   transition: all 0.5s ease;
+
   &:hover .el-icon-star-on {
     transform: scale(1.1);
   }
