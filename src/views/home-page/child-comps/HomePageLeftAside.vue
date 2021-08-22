@@ -1,9 +1,9 @@
 <template>
   <nav-menu
     :data="data"
-    @select="onSelect"
     :page-title="pageTitle"
-    default-active="recently"
+    :default-active="type"
+    :router="true"
   ></nav-menu>
 </template>
 
@@ -75,14 +75,15 @@ export default {
       ],
     };
   },
+  computed: {
+    type() {
+      return this.$route.params.type;
+    },
+  },
   components: {
     navMenu,
   },
-  methods: {
-    onSelect(item) {
-      this.$router.push("/home/subscriptions/type/" + item);
-    },
-  },
+  methods: {},
 };
 </script>
 

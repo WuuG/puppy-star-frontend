@@ -1,7 +1,7 @@
 <template>
   <div class="overflow-auto">
     <index-box :imageUpload="true" :emojiPicker="true" class="p-5"></index-box>
-    <router-view :key="$route.fullPath"></router-view>
+    <router-view></router-view>
   </div>
 </template>
 
@@ -12,6 +12,7 @@ export default {
   components: {
     IndexBox,
   },
+  methods: {},
 };
 </script>
 

@@ -21,6 +21,7 @@ const routes = [
           {
             path: "subscriptions",
             name: "Subscriptions",
+            redirect: "subscriptions/type/recently",
             component: () =>
               import("../views/home-page/subscriptions/Subscriptions.vue"),
             children: [

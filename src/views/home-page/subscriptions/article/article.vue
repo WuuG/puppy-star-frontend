@@ -16,11 +16,12 @@
         :content="article.text"
         :images="article.images"
         :comments="article.comments"
+        v-show="!firstLoading"
       ></content-show-card>
     </template>
     <el-empty
       class="bg-white my-3"
-      v-if="articleArray.length === 0"
+      v-show="!firstLoading && articleArray.length <= 0"
       description="未找到新动态"
     ></el-empty>
     <el-empty
@@ -52,7 +53,6 @@ export default {
       nomoreShow: false,
       number: 3,
       articleArray: [],
-      uniqueSet: new Set(),
       articleParams: {
         skip: 0,
         limit: articleNumber,
@@ -64,17 +64,12 @@ export default {
     ContentShowCard,
   },
   created() {
-    console.log(1);
-  },
-  mounted() {
+    this.resetArticle();
     window.addEventListener("scroll", this.windowScrollHandler);
-    this.debounceLoad();
-  },
-  deactivated() {
-    window.removeEventListener("scroll", this.windowScrollHandler);
   },
   destroyed() {
     window.removeEventListener("scroll", this.windowScrollHandler);
+    console.log(1);
   },
   methods: {
     // 网络方法
@@ -89,22 +84,13 @@ export default {
       }
       return data;
     },
-    /**
-     * 检测并push文章
-     */
-    checkUniquePush(articleArray) {
-      articleArray.forEach((item) => {
-        const uniqueSymbol = item._id;
-        if (this.uniqueSet.has(uniqueSymbol)) {
-          return;
-        }
-        this.uniqueSet.add(uniqueSymbol);
-        this.articleArray.push(item);
-      });
-    },
     // 页面逻辑
     async load() {
       this.loadingDisabled = true;
+      if (this.firstLoading === true) {
+        this.loadingDisabled = false;
+        return;
+      }
       const data = await this.getNewArticle(this.articleParams);
       this.loadingDisabled = false;
       this.firstLoading = false;
@@ -112,7 +98,7 @@ export default {
         this.nomoreShow = true;
         return;
       }
-      this.checkUniquePush(data);
+      data.forEach((item) => this.articleArray.push(item));
       this.nomoreShow = false;
       this.articleParams.skip += articleNumber;
     },
@@ -125,11 +111,21 @@ export default {
         this.debounceLoad();
       }
     },
-    resetArticle() {
-      this.articleArray = [];
-      this.uniqueSet.clear();
+    async resetArticle() {
       this.articleParams.skip = 0;
-      this.load();
+      this.nomoreShow = false;
+      const data = await this.getNewArticle(this.articleParams);
+      if (!data) return;
+      this.articleArray = data;
+      this.articleParams.skip += articleNumber;
+      this.firstLoading = false;
+    },
+  },
+  watch: {
+    "$route.fullPath": function () {
+      this.firstLoading = true;
+      this.resetArticle();
+      console.log("route change");
     },
   },
 };

@@ -69,7 +69,7 @@ export default {
     images: Array,
     userId: String,
   },
-  mounted() {
+  created() {
     this.load();
   },
   computed: {

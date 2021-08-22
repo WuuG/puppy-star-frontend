@@ -4,6 +4,7 @@
       :default-active="defaultActive"
       @select="onSelect"
       class="left-aside-navbar"
+      :router="router"
     >
       <h3 v-if="pageTitle" class="text-gray-800 px-5 text-2xl py-2 font-medium">
         {{ pageTitle }}
@@ -46,6 +47,10 @@ export default {
       default: "text-gray-900 text-base",
     },
     pageTitle: String,
+    router: {
+      type: Boolean,
+      default: false,
+    },
   },
   components: {
     NavMenuItem,
